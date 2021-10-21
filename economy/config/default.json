@@ -1,0 +1,4 @@
+{
+    "mongoURI": "mongodb+srv://adminsagar:adminSagar98@cluster0.2xkto.mongodb.net/economydb?retryWrites=true&w=majority",
+    "jwtSecret": "sl_myJwtSecret"
+}
