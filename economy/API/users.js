@@ -4,6 +4,8 @@ const bcrypt = require('bcryptjs');
 const config = require('config');
 const jwt = require('jsonwebtoken');
 
+const adminPrivileges = require('../middleware/admin')
+
 // User Model
 const User = require('../models/User');
 
@@ -14,7 +16,7 @@ const User = require('../models/User');
 // @route   Get admin
 // @desc    Get All Users
 // @access  Public
-router.get('/admin', async (req, res) => {
+router.get('/admin', adminPrivileges, async (req, res) => {
     try {
         const users = await User.find();
         res.json(users);
@@ -28,7 +30,7 @@ router.get('/admin', async (req, res) => {
 // @route   POST admin
 // @desc    Add a user
 // @access  Public
-router.post('/admin', async (req, res) => {
+router.post('/admin', adminPrivileges, async (req, res) => {
     const { username, email, password, first_name, last_name } = req.body;
 
     // Simple Validation
@@ -61,7 +63,7 @@ router.post('/admin', async (req, res) => {
                 if (err) throw err;
                 newUser.password = hash;
                 const usr = await newUser.save();
-                res.json({msg: 'User added successfully'})
+                res.json({ msg: 'User added successfully' });
             });
         });
     } catch (err) {
@@ -74,7 +76,7 @@ router.post('/admin', async (req, res) => {
 // @route   DELETE admin
 // @desc    Delete a user
 // @access  Public
-router.delete('/admin/:id', async (req, res) => {
+router.delete('/admin/:id', adminPrivileges, async (req, res) => {
     try {
         const user = await User.findById(req.params.id);
         await user.remove();
