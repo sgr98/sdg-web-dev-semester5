@@ -1,5 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const config = require('config');
+const { deleteOne } = require('./models/User');
 
 const app = express();
 
@@ -10,7 +12,10 @@ app.use(express.json());
 // Extracting the value of mongoURI from ./config/default.json
 const dbURI = config.get('mongoURI');
 
-// Connect to Mongo
+// ES6 Promises (for enabling Mocha Testig)
+mongoose.Promise = global.Promise;
+
+// Connect to Mongo Atlas DB
 const connectDB = async () => {
     try {
         await mongoose.connect(dbURI);
@@ -22,5 +27,9 @@ const connectDB = async () => {
 };
 connectDB();
 
+// Use Routes
+app.use('/', require('./API/users'))  // Add a route later
+
+// Assign and listent to the port
 const port = process.env.port || 5000;
 app.listen(port, () => console.log(`Server started on port ${port}`));
