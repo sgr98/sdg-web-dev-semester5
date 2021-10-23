@@ -1,16 +1,19 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors')
 const config = require('config');
-const { deleteOne } = require('./models/User');
+// const { deleteOne } = require('./models/User');
 
 const app = express();
 
 // Express Parser Middleware
-app.use(express.json());
+app.use(express.json({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
+app.use(cors())
 
 // DB Config
 // Extracting the value of mongoURI from ./config/default.json
-const dbURI = config.get('mongoURI');
+const dbURI = config.get('mongoURI');   //===> Change it later to system variable
 
 // ES6 Promises (for enabling Mocha Testig)
 mongoose.Promise = global.Promise;
@@ -29,6 +32,7 @@ connectDB();
 
 // Use Routes
 app.use('/', require('./API/users'))  // Add a route later
+app.use('/dashboard/', require('./API/user_transactions'))  // Add a route later
 
 // Assign and listent to the port
 const port = process.env.port || 5000;

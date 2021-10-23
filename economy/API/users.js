@@ -13,7 +13,7 @@ const User = require('../models/User');
 // ADMIN /admin
 // //////////////////////////////////////////////////////
 
-// @route   Get admin
+// @route   GET /admin
 // @desc    Get All Users
 // @access  Public
 router.get('/admin', adminPrivileges, async (req, res) => {
@@ -27,7 +27,7 @@ router.get('/admin', adminPrivileges, async (req, res) => {
     }
 });
 
-// @route   POST admin
+// @route   POST /admin
 // @desc    Add a user
 // @access  Public
 router.post('/admin', adminPrivileges, async (req, res) => {
@@ -73,7 +73,7 @@ router.post('/admin', adminPrivileges, async (req, res) => {
     }
 });
 
-// @route   DELETE admin
+// @route   DELETE /admin
 // @desc    Delete a user
 // @access  Public
 router.delete('/admin/:id', adminPrivileges, async (req, res) => {

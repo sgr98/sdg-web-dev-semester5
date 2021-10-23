@@ -9,7 +9,7 @@ adminPrivileges = (req, res, next) => {
 
     try {
         // Verify password
-        if (physical_password === config.get('adminPassword')) {
+        if (physical_password === config.get('adminPassword')) {    //===> Change it later to system variable
             next();
         }
         else {
