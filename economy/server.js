@@ -31,8 +31,8 @@ const connectDB = async () => {
 connectDB();
 
 // Use Routes
-app.use('/', require('./API/users'))  // Add a route later
-app.use('/dashboard/', require('./API/user_transactions'))  // Add a route later
+app.use('/', require('./routes/API/users'))  // Add a route later
+app.use('/dashboard/', require('./routes/API/user_transactions'))  // Add a route later
 
 // Assign and listent to the port
 const port = process.env.port || 5000;

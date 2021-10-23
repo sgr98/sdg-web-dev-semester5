@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken');
 const adminPrivileges = require('../middleware/admin')
 
 // User Model
-const User = require('../models/User');
+const User = require('../../models/User');
 
 // //////////////////////////////////////////////////////
 // ADMIN /admin

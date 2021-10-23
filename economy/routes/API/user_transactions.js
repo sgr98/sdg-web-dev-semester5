@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 const config = require('config');
 const jwt = require('jsonwebtoken');
 
-const User = require('../models/User_Transaction');
+const User = require('../../models/User_Transaction');
 
 // //////////////////////////////////////////////////////
 // USER /dashboard/:userId/
