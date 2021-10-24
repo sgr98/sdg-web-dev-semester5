@@ -11,6 +11,10 @@ app.use(express.json({ extended: true }));
 app.use(express.urlencoded({ extended: true }));
 app.use(cors())
 
+// Use Routes
+app.use('/', require('./routes/API/users'))  // Add a route later
+app.use('/dashboard/', require('./routes/API/user_transactions'))  // Add a route later
+
 // DB Config
 // Extracting the value of mongoURI from ./config/default.json
 const dbURI = config.get('mongoURI');   //===> Change it later to system variable
@@ -29,10 +33,6 @@ const connectDB = async () => {
     }
 };
 connectDB();
-
-// Use Routes
-app.use('/', require('./routes/API/users'))  // Add a route later
-app.use('/dashboard/', require('./routes/API/user_transactions'))  // Add a route later
 
 // Assign and listent to the port
 const port = process.env.port || 5000;
