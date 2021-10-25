@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import Navbar from './Components/Navbar';
 import Home from './Components/Home';
+import Authentication from './Components/Authentication';
 import './App.css';
 
 const App = () => {
@@ -11,14 +13,19 @@ const App = () => {
     // useEffect(() => {
     //     dispatch();
     // }, []);
-    
+
     return (
-        <div className="AppContainer">
-            <div>
-                <Navbar />
-                <Home />
+        <BrowserRouter>
+            <div className="AppContainer">
+                <div>
+                    <Navbar />
+                    <Switch>
+                        <Route exact path="/" component={Home} />
+                        <Route exact path="/auth" component={Authentication} />
+                    </Switch>
+                </div>
             </div>
-        </div>
+        </BrowserRouter>
     );
 };
 

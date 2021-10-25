@@ -1,0 +1,26 @@
+.Auth-Paper {
+    margin: 4rem 0;
+    display: 'flex';
+    flex-direction: 'column';
+    align-items: 'center';
+    padding: 1rem;
+}
+
+.MuiTextField-root {
+    margin: 0.5rem;
+}
+
+.Auth-form {
+    width: 100%;
+    margin-top: 1.5rem;
+}
+
+
+.Auth-Sign-Button {
+    margin: 3rem 0;
+}
+
+
+  /* googleButton: {
+    marginBottom: theme.spacing(2),
+  }, */

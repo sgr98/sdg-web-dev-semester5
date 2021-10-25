@@ -1,0 +1,11 @@
+{
+    "user_id": "61729dff8c198c85ca61d681",
+    "user_economy": [
+        {
+            "group": "INCOME",
+            "title": "Salary",
+            "description": "Monthly Salary",
+            "amount": 50000 
+        }
+    ]
+}
