@@ -67,7 +67,7 @@ router.get('/:userId/analytics', auth, async (req, res) => {
             user_id: userId,
         });
         if (user_transactions) {
-            res.json(user_transactions);
+            res.json({ result: user_transactions});
         } else {
             console.log(
                 "User does not exists in records. Check analytics GET one in 'API/user_transactions.js'"
@@ -92,7 +92,7 @@ router.get('/:userId/budgeter', auth, async (req, res) => {
             user_id: userId,
         });
         if (user_transactions) {
-            res.json(user_transactions);
+            res.json({ result: user_transactions});
         } else {
             console.log(
                 "User does not exists in records. Check budgeter GET one in 'API/user_transactions.js'"

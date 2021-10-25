@@ -61,7 +61,7 @@ const Navbar = () => {
                                 className="Navbar-buttons"
                                 style={{ margin: '0 0.5rem 0 0.5rem' }}
                                 component={Link}
-                                to="/dashboard"
+                                to="/dashboard/budgeter"
                             >
                                 Dashboard
                             </Button>
