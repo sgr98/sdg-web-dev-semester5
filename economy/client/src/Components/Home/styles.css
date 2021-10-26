@@ -1,6 +1,6 @@
 .HomeContainer {
     margin: 1rem 0;
-    margin-top: 3rem;
+    margin: 3rem 0;
     color: #eee;
 }
 
@@ -21,7 +21,8 @@
 .home-info {
     margin: 1rem 0;
     padding: 2rem;
-    background: #7d1d1d;
+    background: #1c266a;
+    /* background: #7d1d1d; */
     border-radius: 5px;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
@@ -32,12 +33,25 @@
 .home-title-info {
     padding: 0.5rem 1rem;
     padding-bottom: 2rem;
+    line-height: 2;
+}
+
+.home-card-title {
+    padding: 0.5rem 1rem;
+    padding-bottom: 2rem;
+}
+
+.home-card-info {
+    font-size: 100%;
+    padding: 0.5rem 1rem;
+    padding-bottom: 1rem;
 }
 
 .home-signin {
     margin: 1rem 0;
     padding: 2rem;
-    background: #7d1d1d;
+    background: #1c266a;
+    /* background: #7d1d1d; */
     border-radius: 5px;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;

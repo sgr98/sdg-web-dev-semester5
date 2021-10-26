@@ -49,11 +49,25 @@ const modalBoxStyle = {
 // ///////////////////////////////////////////////////////////////////////////
 // ///////////////////////////////////////////////////////////////////////////
 const Datarows = () => {
+    // //////////////////////////////////////////////////
+    // Initalization
+    // //////////////////////////////////////////////////
     const [transacId, setTransacId] = useState(0);
     const [user, setUser] = useState(
         JSON.parse(localStorage.getItem('profile'))
     );
     // console.log(user)
+    const dispatch = useDispatch();
+    const user_transactions = useSelector((state) => state.transactions);
+    // console.log(user_transactions);
+    
+    useEffect(() => {
+        dispatch(getBudgeterTransactions(user.result._id.toString()));
+    }, [transacId, dispatch]);
+
+    // //////////////////////////////////////////////////
+    // Modal
+    // //////////////////////////////////////////////////
     const [tempTransaction, setTempTransaction] = useState({
         group: "EXPENDITURE",
         title: "",
@@ -74,9 +88,18 @@ const Datarows = () => {
             amount: 0,
         })
     }
+
+    const verifySubmitInput = () => {
+        if(tempTransaction.group === "" || tempTransaction.title === "")
+            return false;
+        return true;
+    }
     
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        if(!verifySubmitInput())
+            return;
 
         if(createEntry) {
             dispatch(createTransaction(user.result._id.toString(), tempTransaction));
@@ -88,14 +111,9 @@ const Datarows = () => {
         handleModalClose();
     }
 
-    const dispatch = useDispatch();
-    const user_transactions = useSelector((state) => state.transactions);
-    // console.log(user_transactions);
-
-    useEffect(() => {
-        dispatch(getBudgeterTransactions(user.result._id.toString()));
-    }, [transacId, dispatch]);
-
+    // //////////////////////////////////////////////////
+    // List
+    // //////////////////////////////////////////////////
     const getDate = (date) => {
         const dat = date.toString().split("T")[0];
         return dat.split("-")[2];
@@ -120,7 +138,7 @@ const Datarows = () => {
 
     return (
         <div className="Datarows-Container">
-            <Button
+            {/* <Button
                 fullWidth
                 variant="outlined"
                 onClick={() =>
@@ -131,7 +149,7 @@ const Datarows = () => {
                 sx={{marginBottom: '2rem'}}
             >
                 Get Entries
-            </Button>
+            </Button> */}
 
             <Button
                 fullWidth
