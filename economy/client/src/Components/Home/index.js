@@ -35,7 +35,7 @@ const Home = () => {
 
             <Container className="home-info">
                 <Typography
-                    variant="h4"
+                    variant="h3"
                     component="div"
                     align="left"
                     sx={{ flexGrow: 1 }}
@@ -67,7 +67,7 @@ const Home = () => {
 
             <Container className="home-signin">
                 <Typography
-                    variant="h4"
+                    variant="h3"
                     component="div"
                     align="left"
                     sx={{ flexGrow: 1 }}
