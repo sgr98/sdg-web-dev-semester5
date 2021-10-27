@@ -264,8 +264,7 @@ To be finalised:
 ### For Developers
 
 * [Github](https://github.com/sgr98/sdg-web-dev-semester5)
-* [Model]()
-* [Video]()
+* [Video](https://drive.google.com/file/d/1eoxcOF9KLHkEN2IATv_AALT6Nuos2356/view?usp=sharing)
 
 <br>
 
