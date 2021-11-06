@@ -5,6 +5,7 @@ import {
     DELETE_TRANSACTION,
 } from '../constants/actionTypes';
 
+// Redux Reducer for transaction
 const transactionReducer = (transactions = {}, action) => {
     switch (action.type) {
         case FETCH_TRANSACTIONS:

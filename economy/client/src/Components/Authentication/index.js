@@ -25,10 +25,12 @@ const Authentication = () => {
     const dispatch = useDispatch();
     const history = useHistory();
 
+    // To show or unshow password
     const handleShowPassword = () => {
         setShowPassword((prevShowPassword) => !prevShowPassword);
     };
 
+    // Submit sign in and sign up form
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -39,10 +41,12 @@ const Authentication = () => {
         }
     };
 
+    // update form data state whenever the value in a field is changed
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
+    // Switch between sign in and sign up form
     const switchMode = () => {
         setIsSignUp((prevIsSignUp) => !prevIsSignUp);
         setShowPassword((prevShowPassword) => false);

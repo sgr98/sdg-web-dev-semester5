@@ -4,6 +4,7 @@ import { styled } from '@mui/material/styles';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 
+// Item theme for rows
 const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
     padding: theme.spacing(1),
@@ -25,11 +26,13 @@ const Transactions = ({
     handleModalOpen,
     handleDelete,
 }) => {
+    // Get date from row Data
     const getDate = (date) => {
         const dat = date.toString().split("T")[0];
         return dat.split("-")[2];
     }
 
+    // Get month from row Data
     const getMonth = (date) => {
         const dat = date.toString().split("T")[0];
         const mon = parseInt(dat.split("-")[1]);
@@ -62,16 +65,19 @@ const Transactions = ({
                                     {`${getDate(transac.updatedAt)} ${getMonth(transac.updatedAt)}`}
                                 </Typography>
                             </Item>
+
                             <Item sx={{width: '66%', background: useColor}}>
                                 <Typography variant="h6">
                                 {`${transac.group} : ${transac.title}`}
                                 </Typography>
                             </Item>
+
                             <Item sx={{width: '10%', background: useColor}}>
                                 <Typography variant="h6">
                                     {`${transac.amount}`}
                                 </Typography>
                             </Item>
+
                             <Item sx={{width: '7%', background: useColor}}>
                                 <IconButton aria-label="edit" onClick={() => {
                                     setTransacId(transac._id);
@@ -87,6 +93,7 @@ const Transactions = ({
                                     <EditIcon />
                                 </IconButton>
                             </Item>
+                            
                             <Item sx={{width: '7%', background: useColor}}>
                                 <IconButton aria-label="delete" onClick={() => handleDelete(transac._id)}>
                                     <DeleteIcon />

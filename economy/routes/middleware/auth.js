@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs');
 const config = require('config');
 const jwt = require('jsonwebtoken');
 
+// Authenticator Middleware
 const auth = async (req, res, next) => {
     try {
         const token = req.headers.authorization.split(' ')[1];

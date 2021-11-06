@@ -15,14 +15,18 @@ import TransactionModal from './TransactionModal/TransactionModal';
 import Transactions from './Transactions/Transactions';
 
 const Datarows = () => {
+
     // //////////////////////////////////////////////////
     // Initalization
     // //////////////////////////////////////////////////
+
+    // Transaction Id state
     const [transacId, setTransacId] = useState(0);
+    // User state
     const [user, setUser] = useState(
         JSON.parse(localStorage.getItem('profile'))
     );
-    // console.log(user)
+
     const dispatch = useDispatch();
     const user_transactions = useSelector((state) => state.transactions);
     // console.log(user_transactions);
@@ -34,6 +38,8 @@ const Datarows = () => {
     // //////////////////////////////////////////////////
     // Modal
     // //////////////////////////////////////////////////
+
+    // State for fields in modal
     const [tempTransaction, setTempTransaction] = useState({
         group: "EXPENDITURE",
         title: "",
@@ -42,9 +48,13 @@ const Datarows = () => {
     });
     const [openModal, setOpenModal] = useState(false);
     const [createEntry, setCreateEntry] = useState(true);
+
+    // Opening the modal
     const handleModalOpen = () => setOpenModal(true);
+    // Closing the modal
     const handleModalClose = () => {setOpenModal(false); setCreateEntry(true);};
     
+    // Clearing all the fields in the modal
     const clearModal = () => {
         setTransacId(0);
         setTempTransaction({
@@ -55,12 +65,14 @@ const Datarows = () => {
         })
     }
 
+    // Verifying whether input is filled or not 
     const verifySubmitInput = () => {
         if(tempTransaction.group === "" || tempTransaction.title === "")
             return false;
         return true;
     }
     
+    // Submitting a modal, used for both creating and editing rows
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -78,8 +90,9 @@ const Datarows = () => {
     }
 
     // //////////////////////////////////////////////////
-    // List
+    // Transaction Rows
     // //////////////////////////////////////////////////
+    // Deleting a row in transaction
     const handleDelete = (id) => {
         const temp = {
             group: "",
@@ -87,7 +100,6 @@ const Datarows = () => {
             description: "",
             amount: 0,
         }
-        // console.log(id)
         dispatch(deleteTransaction(user.result._id.toString(), id, temp));
     }
 

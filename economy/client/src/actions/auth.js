@@ -1,6 +1,7 @@
 import { AUTH } from '../constants/actionTypes';
 import { signIn, signUp } from '../api';
 
+// Redux Action for sign in
 export const signin = (formData, history) => async (dispatch) => {
     try {
         const { data } = await signIn(formData);
@@ -12,6 +13,7 @@ export const signin = (formData, history) => async (dispatch) => {
     }
 };
 
+// Redux Action for sign up
 export const signup = (formData, history) => async (dispatch) => {
     try {
         const { data } = await signUp(formData);

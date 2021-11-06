@@ -22,6 +22,8 @@ const Navbar = () => {
     };
 
     useEffect(() => {
+        // Save the JWT token for the user that is authorized, 
+        // token also saves user_transactions data
         const token = user?.token;
 
         if (token) {

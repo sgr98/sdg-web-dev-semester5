@@ -1,5 +1,6 @@
 const config = require('config')
 
+// Middleware to check for admin
 adminPrivileges = (req, res, next) => {
     const physical_password = req.header('x-admin-physical-password');
 

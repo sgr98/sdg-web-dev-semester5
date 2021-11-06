@@ -1,6 +1,7 @@
 import React from 'react';
 import { Typography, Button, Modal, Box, TextField } from '@mui/material';
 
+// CSS for the Modal
 const modalBoxStyle = {
     position: 'absolute',
     top: '50%',

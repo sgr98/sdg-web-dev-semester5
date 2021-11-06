@@ -1,5 +1,6 @@
 import { AUTH, LOGOUT } from '../constants/actionTypes';
 
+// Redux Reducer for authentication
 const authReducer = (state = { authData: null }, action) => {
     switch(action.type) {
         case AUTH:
