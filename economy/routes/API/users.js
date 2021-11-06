@@ -111,11 +111,13 @@ router.post('/signin', async (req, res) => {
                 .json({ msg: 'User does not exist. Error while sigining in.' });
         }
 
-        const isPasswordCorrect = bcrypt.compare(
+        let isPasswordCorrect = false;
+        isPasswordCorrect = await bcrypt.compare(
             password,
             existingUser.password
         );
         if (!isPasswordCorrect) {
+            console.log("Incorrect Passowrd");
             return res.status(404).json({ msg: 'Invalid Credentials.' });
         }
 
