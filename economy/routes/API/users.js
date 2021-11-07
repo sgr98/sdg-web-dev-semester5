@@ -11,6 +11,32 @@ const User = require('../../models/User');
 // UserTransaction Model
 const UserTransaction = require('../../models/User_Transaction');
 
+// Check whether the password is strong or not
+const isStrongPassword = (password) => {
+    if (password.length < 7) return false;
+
+    let containsNumber = false;
+    for (let i = 0; i < s.length; i++) {
+        if (s.charCodeAt(i) >= 48 && s.charCodeAt(i) <= 57)
+            containsNumber = true;
+    }
+    if (!containsNumber) return false;
+
+    let containsSpecialCharacter = false;
+    for (let i = 0; i < s.length; i++) {
+        if (
+            (s.charCodeAt(i) >= 33 && s.charCodeAt(i) <= 47) ||
+            (s.charCodeAt(i) >= 58 && s.charCodeAt(i) <= 64) ||
+            (s.charCodeAt(i) >= 91 && s.charCodeAt(i) <= 96) ||
+            (s.charCodeAt(i) >= 123 && s.charCodeAt(i) <= 126)
+        )
+            containsSpecialCharacter = true;
+    }
+    if (!containsSpecialCharacter) return false;
+
+    return true;
+};
+
 // //////////////////////////////////////////////////////
 // ADMIN /admin
 // //////////////////////////////////////////////////////
@@ -117,7 +143,7 @@ router.post('/signin', async (req, res) => {
             existingUser.password
         );
         if (!isPasswordCorrect) {
-            console.log("Incorrect Passowrd");
+            console.log('Incorrect Passowrd');
             return res.status(404).json({ msg: 'Invalid Credentials.' });
         }
 
@@ -150,6 +176,15 @@ router.post('/signup', async (req, res) => {
                 .json({ msg: 'User already exists. Error while sigining up.' });
         }
 
+        // if (!isStrongPassword(password)) {
+        //     console.log('Not a strong password');
+        //     return res
+        //         .status(400)
+        //         .json({
+        //             msg: 'Please make a stronger password. The password should be of atleast 7 characters. You should use aplhabets, numbers and special characters.',
+        //         });
+        // }
+
         if (password !== confirmPassword) {
             return res.status(400).json({ msg: 'Password does not match.' });
         }
@@ -167,7 +202,7 @@ router.post('/signup', async (req, res) => {
         // Create user_economy space in user_transactions db
         await UserTransaction.create({
             user_id: result._id,
-            user_economy: []
+            user_economy: [],
         });
 
         const token = jwt.sign(
