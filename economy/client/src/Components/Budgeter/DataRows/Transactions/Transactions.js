@@ -28,13 +28,13 @@ const Transactions = ({
 }) => {
     // Get date from row Data
     const getDate = (date) => {
-        const dat = date.toString().split("T")[0];
+        const dat = date.split("T")[0];
         return dat.split("-")[2];
     }
 
     // Get month from row Data
     const getMonth = (date) => {
-        const dat = date.toString().split("T")[0];
+        const dat = date.split("T")[0];
         const mon = parseInt(dat.split("-")[1]);
         return months[mon - 1];
     }
@@ -62,7 +62,7 @@ const Transactions = ({
                         >
                             <Item sx={{width: '10%', background: useColor}}>
                                 <Typography variant="h6">
-                                    {`${getDate(transac.updatedAt)} ${getMonth(transac.updatedAt)}`}
+                                    {`${getDate(transac.createdAt)} ${getMonth(transac.createdAt)}`}
                                 </Typography>
                             </Item>
 

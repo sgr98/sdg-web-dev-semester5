@@ -171,16 +171,18 @@ router.patch('/:userId/budgeter/:type/:id', auth, async (req, res) => {
 
             if (requiredID >= 0) {
                 if(type === 'edit') {
+                    const createdAt = userEconomy[requiredID].createdAt;
                     userEconomy[requiredID] = {
                         group,
                         title,
                         description,
                         amount,
+                        createdAt,
                     }
                 }
                 else if(type === 'delete') {
                     userEconomy.splice(requiredID, 1)
-                    console.log(userEconomy)
+                    // console.log(userEconomy)
                 }
                 const updated = await UserTransaction.findOneAndUpdate(
                     { user_id: userId },
