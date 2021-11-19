@@ -115,7 +115,7 @@ const Authentication = () => {
                         fullWidth
                         variant="contained"
                         color="primary"
-                        style={{ marginTop: '1.5rem' }}
+                        sx={{ marginTop: '1.5rem' }}
                     >
                         {isSignUp ? 'Sign Up' : 'Sign In'}
                     </Button>
@@ -123,7 +123,7 @@ const Authentication = () => {
                         <Grid item>
                             <Button
                                 onClick={switchMode}
-                                style={{ marginTop: '1rem' }}
+                                sx={{ marginTop: '1rem' }}
                             >
                                 {isSignUp
                                     ? 'Already have an account? Sign In'

@@ -1,20 +1,7 @@
 import React from 'react';
 import { Typography, Button, Modal, Box, TextField } from '@mui/material';
 
-// CSS for the Modal
-const modalBoxStyle = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: '#ddd',
-    color: '#030303',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-    borderRadius: '10px',
-};
+import { modalBoxStyle, modalBoxTitle, modalBoxText } from './styles';
 
 const TransactionModal = ({ 
     openModal,
@@ -38,7 +25,7 @@ const TransactionModal = ({
                         id="modal-modal-title" 
                         variant="h6" 
                         component="h2"
-                        sx={{ marginBottom: '2rem 0' }}
+                        sx={modalBoxTitle}
                     >
                         { createEntry ? "Make an entry" : "Edit an entry" }
                     </Typography>
@@ -50,7 +37,7 @@ const TransactionModal = ({
                         required
                         color="secondary"
                         value={tempTransaction.group}
-                        sx={{ margin: '0.5rem 0' }}
+                        sx={modalBoxText}
                         onChange={(e) => setTempTransaction({ ...tempTransaction, group: e.target.value })} 
                     />
                     <TextField 
@@ -61,7 +48,7 @@ const TransactionModal = ({
                         required
                         color="secondary"
                         value={tempTransaction.title}
-                        sx={{ margin: '0.5rem 0' }}
+                        sx={modalBoxText}
                         onChange={(e) => setTempTransaction({ ...tempTransaction, title: e.target.value })} 
                     />
                     <TextField 
@@ -71,7 +58,7 @@ const TransactionModal = ({
                         fullWidth
                         color="secondary"
                         value={tempTransaction.description}
-                        sx={{ margin: '0.5rem 0' }}
+                        sx={modalBoxText}
                         onChange={(e) => setTempTransaction({ ...tempTransaction, description: e.target.value })} 
                     />
                     <TextField 
@@ -83,7 +70,7 @@ const TransactionModal = ({
                         type="number"
                         color="secondary"
                         value={tempTransaction.amount}
-                        sx={{ margin: '0.5rem 0' }}
+                        sx={modalBoxText}
                         onChange={(e) => setTempTransaction({ ...tempTransaction, amount: e.target.value })} 
                     />
 
