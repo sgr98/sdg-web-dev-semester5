@@ -1,22 +1,52 @@
-import React from 'react';
-import { Grid, Paper, Stack, Typography, Divider, IconButton } from '@mui/material';
-import { styled } from '@mui/material/styles';
+import React, { useState } from 'react';
+import { 
+    Accordion,
+    AccordionSummary,
+    AccordionDetails,
+    Typography,
+    Divider,
+    IconButton,
+    Box,
+} from '@mui/material';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-// Item theme for rows
-const Item = styled(Paper)(({ theme }) => ({
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    alignItems: 'center',
-    justifyContent: 'center',
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-}));
+import { budgeterDropdownBox, budgeterTitleBox, budgeterDescriptionBox } from './styles';
+
+const groupOptions = [
+    'Income',
+    'Housing/Rent',
+    'Periodic Bills',
+    'Food',
+    'Medical',
+    'Transportation',
+    'Taxes',
+    'Insurance',
+    'Short Purchases',
+    'Consumer Durables',
+    'Investment',
+    'Recreational',
+    'Miscellaneous',
+];
+
+const groupOptionsColors = {
+    'Income': ['rgba(38, 159, 66, 0.9)', 'rgba(38, 159, 66, 0.2)'],
+    'Housing/Rent': ['rgba(255, 194, 12, 0.9)', 'rgba(255, 194, 12, 0.2)'],
+    'Periodic Bills': ['rgba(255, 194, 12, 0.9)', 'rgba(255, 194, 12, 0.2)'],
+    'Food': ['rgba(255, 194, 12, 0.9)', 'rgba(255, 194, 12, 0.2)'],
+    'Medical': ['rgba(255, 194, 12, 0.9)', 'rgba(255, 194, 12, 0.2)'],
+    'Transportation': ['rgba(15, 80, 182, 0.9)', 'rgba(15, 80, 182, 0.2)'],
+    'Taxes': ['rgba(15, 80, 182, 0.9)', 'rgba(15, 80, 182, 0.2)'],
+    'Insurance': ['rgba(15, 80, 182, 0.9)', 'rgba(15, 80, 182, 0.2)'],
+    'Short Purchases': ['rgba(124, 43, 177, 0.9)', 'rgba(124, 43, 177, 0.2)'],
+    'Consumer Durables': ['rgba(124, 43, 177, 0.9)', 'rgba(124, 43, 177, 0.2)'],
+    'Investment': ['rgba(243, 115, 0, 0.9)', 'rgba(243, 115, 0, 0.2)'],
+    'Recreational': ['rgba(243, 115, 0, 0.9)', 'rgba(243, 115, 0, 0.2)'],
+    'Miscellaneous': ['rgba(243, 115, 0, 0.9)', 'rgba(243, 115, 0, 0.2)'],
+}
 
 const months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
-const green = "#8cce7e";
-const red = "#e73131";
 
 const Transactions = ({ 
     user_transactions,
@@ -40,70 +70,91 @@ const Transactions = ({
     }
 
     return (
-        <Grid container direction='column' spacing={2} sx={{marginTop: '1rem', color: '#fff'}}>
-            {user_transactions.user_economy ? 
-                user_transactions.user_economy.map((transac) => {
-                    let useColor;
-                    switch(transac.group) {
-                        case "INCOME":
-                            useColor = green;
-                            break;
-                        default:
-                            useColor = red;
-                            break;
-                    }
-                    return (
-                        <Stack
-                            direction="row"
-                            divider={<Divider orientation="vertical" flexItem />}
-                            spacing={1}
-                            sx={{marginBottom: '0.5rem 0'}}
-                            key={transac._id}
+        <div style={{marginTop: '1rem', color: '#fff'}}>
+            {groupOptions.map((groupOpt) => {
+                const useColor = groupOptionsColors[groupOpt];
+                return (
+                    <Accordion>
+                        <AccordionSummary
+                            expandIcon={<ExpandMoreIcon />}
+                            aria-controls="panel1a-content"
+                            id="panel1a-header"
+                            sx = {{ bgcolor: useColor[0] }}
+                            // sx = {{ bgcolor: 'rgba(38, 159, 66, 0.2)' }}
                         >
-                            <Item sx={{width: '10%', background: useColor}}>
-                                <Typography variant="h6">
-                                    {`${getDate(transac.createdAt)} ${getMonth(transac.createdAt)}`}
-                                </Typography>
-                            </Item>
+                            <Typography sx={{ fontSize: '150%' }}>{groupOpt}</Typography>
+                        </AccordionSummary>
+                        <Divider />
+                        <AccordionDetails sx={{ bgcolor: useColor[1] }}>
+                        {user_transactions.user_economy ? 
+                            user_transactions.user_economy.map((transac, index, array) => {
+                                return (
+                                    transac.group === groupOpt ? (
+                                        <div>
+                                            <Box
+                                                sx={budgeterDropdownBox}
+                                            >
+                                                <Typography variant="h6" sx={{ width: '8%' }}>
+                                                    {`${getDate(transac.createdAt)} ${getMonth(transac.createdAt)}`}
+                                                </Typography>
+                                                <Divider orientation="vertical" flexItem />
 
-                            <Item sx={{width: '66%', background: useColor}}>
-                                <Typography variant="h6">
-                                {`${transac.group} : ${transac.title}`}
-                                </Typography>
-                            </Item>
+                                                <Typography variant="h6" sx={budgeterTitleBox}>
+                                                    {`${transac.title}`}
+                                                    <Typography sx={budgeterDescriptionBox}>
+                                                        {`${transac.description}`}
+                                                    </Typography>
+                                                </Typography>
+                                                <Divider orientation="vertical" flexItem />
+                                                
+                                                <Typography variant="h6" sx={{ width: '10%' }}>
+                                                    {`${transac.amount}`}
+                                                </Typography>
+                                                <Divider orientation="vertical" flexItem />
 
-                            <Item sx={{width: '10%', background: useColor}}>
-                                <Typography variant="h6">
-                                    {`${transac.amount}`}
-                                </Typography>
-                            </Item>
+                                                <IconButton 
+                                                    color="primary"
+                                                    aria-label="edit" 
+                                                    // size="small"
+                                                    sx={{ width: '6%' }}
+                                                    onClick={() => {
+                                                        setTransacId(transac._id);
+                                                        setTempTransaction({
+                                                            group: transac.group,
+                                                            title: transac.title,
+                                                            description: transac.description,
+                                                            amount: transac.amount,
+                                                        });
+                                                        setCreateEntry(false);
+                                                        handleModalOpen();
+                                                    }}
+                                                >
+                                                    <EditIcon />
+                                                </IconButton>
+                                                <Divider orientation="vertical" flexItem />
 
-                            <Item sx={{width: '7%', background: useColor}}>
-                                <IconButton aria-label="edit" onClick={() => {
-                                    setTransacId(transac._id);
-                                    setTempTransaction({
-                                        group: transac.group,
-                                        title: transac.title,
-                                        description: transac.description,
-                                        amount: transac.amount,
-                                    });
-                                    setCreateEntry(false);
-                                    handleModalOpen();
-                                }}>
-                                    <EditIcon />
-                                </IconButton>
-                            </Item>
-                            
-                            <Item sx={{width: '7%', background: useColor}}>
-                                <IconButton aria-label="delete" onClick={() => handleDelete(transac._id)}>
-                                    <DeleteIcon />
-                                </IconButton>
-                            </Item>
-                        </Stack>
-                    )
-                })
-                : null }
-        </Grid>
+                                                <IconButton 
+                                                    color="error"
+                                                    aria-label="delete" 
+                                                    size="small"
+                                                    sx={{ width: '6%' }}
+                                                    onClick={() => handleDelete(transac._id)}
+                                                >
+                                                    <DeleteIcon />
+                                                </IconButton>
+                                            </Box>
+                                            {/* { index !== array.length - 1 ? <Divider /> : null } */}
+                                            <Divider />
+                                        </div>
+                                    ) : null 
+                                )
+                            })
+                            : null }
+                        </AccordionDetails>
+                    </Accordion>
+                )
+            })}
+        </div>
     );
 };
 

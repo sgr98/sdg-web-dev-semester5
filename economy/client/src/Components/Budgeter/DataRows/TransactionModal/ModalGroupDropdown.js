@@ -38,7 +38,7 @@ const ModalGroupDropdown = ({
     const handleMenuItemClick = (event, index) => {
         setSelectedGroupIndex(index);
         setGroupAnchorEl(null);
-        setTempTransaction({ ...tempTransaction, group: groupOptions[selectedGroupIndex] })
+        setTempTransaction({ ...tempTransaction, group: groupOptions[index] });
     };
 
     const handleClose = () => {
