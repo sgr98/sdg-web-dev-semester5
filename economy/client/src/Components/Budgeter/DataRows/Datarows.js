@@ -41,7 +41,7 @@ const Datarows = () => {
 
     // State for fields in modal
     const [tempTransaction, setTempTransaction] = useState({
-        group: "EXPENDITURE",
+        group: "Income",
         title: "",
         description: "",
         amount: 0,
@@ -58,7 +58,7 @@ const Datarows = () => {
     const clearModal = () => {
         setTransacId(0);
         setTempTransaction({
-            group: "EXPENDITURE",
+            group: "Income",
             title: "",
             description: "",
             amount: 0,

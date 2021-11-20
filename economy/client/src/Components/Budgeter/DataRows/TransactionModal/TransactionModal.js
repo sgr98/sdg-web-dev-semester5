@@ -1,6 +1,18 @@
-import React from 'react';
-import { Typography, Button, Modal, Box, TextField } from '@mui/material';
+import React, { useState } from 'react';
+import { 
+    Typography, 
+    Button, 
+    Modal, 
+    Box, 
+    TextField,
+    List,
+    ListItem,
+    ListItemText,
+    MenuItem,
+    Menu
+} from '@mui/material';
 
+import ModalGroupDropdown from './ModalGroupDropdown';
 import { modalBoxStyle, modalBoxTitle, modalBoxText } from './styles';
 
 const TransactionModal = ({ 
@@ -29,16 +41,10 @@ const TransactionModal = ({
                     >
                         { createEntry ? "Make an entry" : "Edit an entry" }
                     </Typography>
-                    <TextField 
-                        name="group" 
-                        variant="outlined" 
-                        label="Group" 
-                        fullWidth
-                        required
-                        color="secondary"
-                        value={tempTransaction.group}
-                        sx={modalBoxText}
-                        onChange={(e) => setTempTransaction({ ...tempTransaction, group: e.target.value })} 
+                    
+                    <ModalGroupDropdown 
+                        tempTransaction={tempTransaction}
+                        setTempTransaction={setTempTransaction} 
                     />
                     <TextField 
                         name="title" 
