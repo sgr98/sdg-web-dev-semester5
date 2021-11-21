@@ -39,7 +39,7 @@ const Navbar = () => {
     }, [location]);
 
     return (
-        <Box sx={{ flexGrow: 1 }} style={{ margin: '0 0 1rem 0' }}>
+        <Box sx={{ flexGrow: 1, margin: '0'}}>
             <AppBar
                 position="static"
                 style={{ background: '#232931' }}

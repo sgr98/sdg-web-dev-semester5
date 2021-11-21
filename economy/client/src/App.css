@@ -1,8 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
 body {
     margin: 0;
     /* background-image: url('./Images/body_background.png'); */
-    background: linear-gradient(162deg, rgba(253,250,246,1) 0%, rgba(230,235,241,1) 50%, rgba(186,208,232,1) 100%);
-    min-height: 100vh
+    background: linear-gradient(162deg, rgba(253,250,246,1) 0%,  rgba(186,208,232,1) 100%);
+    min-height: 100vh;
+    font-family: 'Roboto', sans-serif;  
 }
 
 /* .AppContainer {
