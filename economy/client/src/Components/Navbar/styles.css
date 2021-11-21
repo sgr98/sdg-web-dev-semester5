@@ -8,12 +8,6 @@
     background: #14279B;
 }
 
-.Navbar-buttons {
-    margin: 0 1rem 0 1rem;
-    color: '#222';
-    background: #14279B;
-}
-
 @media screen and (max-width: 480px) {
     .Navbar-buttons {
         margin: 0 0.5rem 0 0.5rem

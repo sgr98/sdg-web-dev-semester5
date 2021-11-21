@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory, useLocation } from 'react-router-dom';
-import { Box, AppBar, Typography, Toolbar, Button } from '@mui/material';
+import { Box, AppBar, Typography, Toolbar, Button, IconButton, Tab, Tabs } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import decode from 'jwt-decode';
+import LogoutIcon from '@mui/icons-material/Logout';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+
 import { LOGOUT } from '../../constants/actionTypes';
 
 import './styles.css';
@@ -36,68 +39,110 @@ const Navbar = () => {
     }, [location]);
 
     return (
-        <Box sx={{ flexGrow: 1 }} style={{ margin: '1rem 0' }}>
+        <Box sx={{ flexGrow: 1 }} style={{ margin: '0 0 1rem 0' }}>
             <AppBar
                 position="static"
-                style={{ background: '#4E9F3D', borderRadius: '5px' }}
+                style={{ background: '#232931' }}
             >
-                <Toolbar>
-                    <Typography
-                        style={{ textDecoration: 'none', color: '#eee' }}
-                        variant="h5"
-                        component="div"
-                        sx={{ flexGrow: 1 }}
-                        component={Link}
-                        to="/"
-                    >
-                        {window.innerWidth >= 720
-                            ? 'Home Budget Economy'
-                            : 'HBE'}
-                    </Typography>
-
-                    {user ? (
+                <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <div>
+                        <Typography
+                            style={{ textDecoration: 'none', color: '#eee' }}
+                            variant="h5"
+                            component={Link}
+                            to="/"
+                        >
+                            {/* {window.innerWidth >= 720
+                                ? 'Home Budget Economy'
+                                : 'HBE'} */}
+                            HBE
+                        </Typography>
+                        {/* style={{ width: '50%', display: 'flex', justifyContent: 'space-around' }} */}
+                    </div>
+                    {user ? (   
                         <div className="Navbar-links">
-                            <Button
+                            {/* <Button
                                 variant="contained"
-                                color="primary"
-                                className="Navbar-buttons"
-                                style={{ margin: '0 0.5rem 0 0.5rem' }}
+                                color="warning"
+                                sx={{ margin: '0 0.75rem 0 0.75rem' }}
                                 component={Link}
                                 to="/dashboard/budgeter"
                             >
                                 Dashboard
-                            </Button>
-                            <Typography
+                            </Button> */}
+
+                            <div>
+                                <Button 
+                                    sx={{ textDecoration: 'none', color: '#eee' }}
+                                    component={Link}
+                                    to="/dashboard/budgeter"    
+                                >
+                                    Dashboard
+                                </Button>
+                            </div>
+
+                            {/* <Typography
                                 style={{
                                     margin: '0 0.25rem',
-                                    color: '#14279B',
+                                    color: '#eee',
                                 }}
                                 variant="h6"
                             >
                                 {user?.result.username}
-                            </Typography>
-                            <Button
+                                
+                            </Typography> */}
+                            <AccountCircleIcon 
+                                fontSize="large" 
+                                sx={{ 
+                                    // position: 'fixed', 
+                                    top: '10px', 
+                                    margin: '0 0.75rem 0 0.75rem', 
+                                    // color: '#65ba2c' 
+                                    color: "#eee"
+                                }} 
+                            />
+                            {/* <Button
                                 variant="contained"
                                 color="primary"
                                 className="Navbar-buttons"
                                 style={{ margin: '0 0.5rem 0 0.5rem' }}
                                 onClick={logout}
                             >
-                                Log Out
-                            </Button>
+                                <LogoutIcon sx={{right: '30px'}}/>
+                            </Button> */}
+                            <div>
+                                <Button 
+                                    sx={{ textDecoration: 'none', color: '#eee' }}
+                                    onClick={logout}   
+                                >
+                                    Logout
+                                </Button>
+                            </div>
+                            {/* <IconButton 
+                                color="inherit"
+                                aria-label="delete" 
+                                size="medium"
+                                onClick={logout}
+                                sx={{ size: '40' }}
+                            >
+                                <LogoutIcon />
+                            </IconButton> */}
                         </div>
                     ) : (
-                        <div className="Navbar-links">
+                        location.pathname === '/auth' ? null : (
+                            <div className="Navbar-links">
                             <Button
                                 variant="contained"
                                 color="primary"
-                                style={{ margin: '0 0.5rem 0 0.5rem' }}
+                                style={{ margin: '0 0 0 0.75rem' }}
                                 component={Link}
                                 to="/auth"
+                                onClick={() => {console.log(location.pathname)}}
                             >
                                 Sign In
                             </Button>
                         </div>
+                        )
                     )}
                 </Toolbar>
             </AppBar>
