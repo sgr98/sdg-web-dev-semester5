@@ -6,13 +6,25 @@ import {
     Typography,
     Divider,
     IconButton,
+    Button,
     Box,
+    Dialog,
+    DialogTitle,
+    DialogActions,
+    Container,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-import { budgeterDropdownBox, budgeterTitleBox, budgeterDescriptionBox } from './styles';
+import { 
+    budgeterDropdownBox, 
+    budgeterTitleBox, 
+    budgeterDescriptionBox, 
+    budgeterAmountBox,
+    budgeterSavingsContainer, 
+    budgeterSavings,
+} from './styles';
 
 const groupOptions = [
     'Income',
@@ -56,6 +68,16 @@ const Transactions = ({
     handleModalOpen,
     handleDelete,
 }) => {
+    const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
+
+    const handleDeleteDialogOpen = () => {
+        setOpenDeleteDialog(true);
+    };
+    
+      const handleDeleteDialogClose = () => {
+        setOpenDeleteDialog(false);
+    };
+
     // Get date from row Data
     const getDate = (date) => {
         const dat = date.split("T")[0];
@@ -69,12 +91,41 @@ const Transactions = ({
         return months[mon - 1];
     }
 
+    // Convert amount in international comma format
+    const commaFormatAmount = (amt) => {
+        let comForAmt = "";
+        let count = 1;
+        while(amt !== 0) {
+            const n = amt % 10;
+            comForAmt = n + comForAmt;
+            if(count === 3 && amt > 10) {
+                comForAmt = "," + comForAmt;
+                count = 0;
+            }
+            count++;
+            amt /= 10;
+            amt = Math.floor(amt);
+        }
+        if(comForAmt === "")
+            return "0";
+        return comForAmt;
+    }
+
+    // Fot total savings
+    let savings = 0;
+    const addTotalSavings = (transac) => {
+        if(transac.group === 'Income')
+            savings += transac.amount;
+        else
+            savings -= transac.amount; 
+    }
+
     return (
         <div style={{marginTop: '1rem', color: '#fff'}}>
-            {groupOptions.map((groupOpt) => {
+            {groupOptions.map((groupOpt, index) => {
                 const useColor = groupOptionsColors[groupOpt];
                 return (
-                    <Accordion>
+                    <Accordion key={index}>
                         <AccordionSummary
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel1a-content"
@@ -88,9 +139,10 @@ const Transactions = ({
                         <AccordionDetails sx={{ bgcolor: useColor[1] }}>
                         {user_transactions.user_economy ? 
                             user_transactions.user_economy.map((transac, index, array) => {
+                                addTotalSavings(transac)
                                 return (
                                     transac.group === groupOpt ? (
-                                        <div>
+                                        <div key={index}>
                                             <Box
                                                 sx={budgeterDropdownBox}
                                             >
@@ -107,8 +159,8 @@ const Transactions = ({
                                                 </Typography>
                                                 <Divider orientation="vertical" flexItem />
                                                 
-                                                <Typography variant="h6" sx={{ width: '10%' }}>
-                                                    {`${transac.amount}`}
+                                                <Typography variant="h6" sx={budgeterAmountBox}>
+                                                    {commaFormatAmount(transac.amount)}
                                                 </Typography>
                                                 <Divider orientation="vertical" flexItem />
 
@@ -142,6 +194,23 @@ const Transactions = ({
                                                 >
                                                     <DeleteIcon />
                                                 </IconButton>
+
+                                                {/* <Dialog
+                                                    open={openDeleteDialog}
+                                                    onClose={handleDeleteDialogClose}
+                                                    aria-labelledby="alert-dialog-title"
+                                                    aria-describedby="alert-dialog-description"
+                                                >
+                                                    <DialogTitle id="alert-dialog-title">
+                                                        Do you want to delete this entry?
+                                                    </DialogTitle>
+                                                    <DialogActions>
+                                                    <Button onClick={handleDeleteDialogClose}>No</Button>
+                                                    <Button onClick={() => handleDelete(transac._id)}>
+                                                        Yes
+                                                    </Button>
+                                                    </DialogActions>
+                                                </Dialog> */}
                                             </Box>
                                             {/* { index !== array.length - 1 ? <Divider /> : null } */}
                                             <Divider />
@@ -154,6 +223,11 @@ const Transactions = ({
                     </Accordion>
                 )
             })}
+            <Container sx={budgeterSavingsContainer}>
+                <Typography variant="h6" sx={budgeterSavings}>
+                    Savings : {commaFormatAmount(savings / groupOptions.length)}
+                </Typography>
+            </Container>
         </div>
     );
 };

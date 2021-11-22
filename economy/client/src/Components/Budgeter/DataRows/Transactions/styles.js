@@ -25,3 +25,25 @@ export const budgeterDescriptionBox = {
     color: '#5b5b5b', 
     fontSize: '75%' 
 };
+
+export const budgeterAmountBox = {
+    width: '10%',
+    wordBreak: 'break-all', 
+    whiteSpace: 'normal',
+};
+
+export const budgeterSavingsContainer = {
+    display: 'flex',
+    float: 'right',
+    marginTop: '1.5rem',
+    marginBottom: '3rem',
+    padding: '1rem',
+    width: 'fit-content',
+    background: '#232931',
+    borderRadius: '10px',
+};
+
+export const budgeterSavings = {
+    wordBreak: 'break-all', 
+    whiteSpace: 'normal',
+};

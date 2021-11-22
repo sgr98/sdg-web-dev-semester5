@@ -126,7 +126,7 @@ const Datarows = () => {
                     clearModal();
                     setCreateEntry(true);
                 }}
-                sx={{marginBottom: '2rem'}}
+                sx={{ marginBottom: '2rem', height: '42px' }}
             >
                 Make an entry
             </Button>
