@@ -37,7 +37,7 @@ export const budgeterSavingsContainer = {
     float: 'right',
     marginTop: '1.5rem',
     marginBottom: '3rem',
-    padding: '1rem',
+    padding: '0.5rem',
     width: 'fit-content',
     background: '#232931',
     borderRadius: '10px',

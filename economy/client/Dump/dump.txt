@@ -1,0 +1,52 @@
+client/src/Components/Budgeter/Datarows/Transactions/Transactions.js
+
+// Original
+const groupOptionsColors = {
+    'Income': ['rgba(38, 159, 66, 0.9)', 'rgba(38, 159, 66, 0.2)'],
+    'Housing/Rent': ['rgba(255, 194, 12, 0.9)', 'rgba(255, 194, 12, 0.2)'],
+    'Periodic Bills': ['rgba(255, 194, 12, 0.9)', 'rgba(255, 194, 12, 0.2)'],
+    'Food': ['rgba(255, 194, 12, 0.9)', 'rgba(255, 194, 12, 0.2)'],
+    'Medical': ['rgba(255, 194, 12, 0.9)', 'rgba(255, 194, 12, 0.2)'],
+    'Transportation': ['rgba(15, 80, 182, 0.9)', 'rgba(15, 80, 182, 0.2)'],
+    'Taxes': ['rgba(15, 80, 182, 0.9)', 'rgba(15, 80, 182, 0.2)'],
+    'Insurance': ['rgba(15, 80, 182, 0.9)', 'rgba(15, 80, 182, 0.2)'],
+    'Short Purchases': ['rgba(124, 43, 177, 0.9)', 'rgba(124, 43, 177, 0.2)'],
+    'Consumer Durables': ['rgba(124, 43, 177, 0.9)', 'rgba(124, 43, 177, 0.2)'],
+    'Investment': ['rgba(243, 115, 0, 0.9)', 'rgba(243, 115, 0, 0.2)'],
+    'Recreational': ['rgba(243, 115, 0, 0.9)', 'rgba(243, 115, 0, 0.2)'],
+    'Miscellaneous': ['rgba(243, 115, 0, 0.9)', 'rgba(243, 115, 0, 0.2)'],
+}
+
+// Faint mixed
+const groupOptionsColors = {
+    'Income': ['rgba(4, 190, 119, 0.9)', 'rgba(4, 190, 119, 0.2)'],
+    'Housing/Rent': ['rgba(231, 246, 91, 0.9)', 'rgba(231, 246, 91, 0.2)'],
+    'Periodic Bills': ['rgba(231, 246, 91, 0.9)', 'rgba(231, 246, 91, 0.2)'],
+    'Food': ['rgba(231, 246, 91, 0.9)', 'rgba(231, 246, 91, 0.2)'],
+    'Medical': ['rgba(231, 246, 91, 0.9)', 'rgba(231, 246, 91, 0.2)'],
+    'Transportation': ['rgba(255, 130, 82, 0.9)', 'rgba(249, 142, 47, 0.2)'],
+    'Taxes': ['rgba(249, 142, 47, 0.9)', 'rgba(249, 142, 47, 0.2)'],
+    'Insurance': ['rgba(249, 142, 47, 0.9)', 'rgba(249, 142, 47, 0.2)'],
+    'Short Purchases': ['rgba(239, 57, 67, 0.9)', 'rgba(239, 57, 67, 0.2)'],
+    'Consumer Durables': ['rgba(239, 57, 67, 0.9)', 'rgba(239, 57, 67, 0.2)'],
+    'Investment': ['rgba(38, 160, 237, 0.9)', 'rgba(38, 160, 237, 0.2)'],
+    'Recreational': ['rgba(193, 85, 251, 0.9)', 'rgba(38, 160, 237, 0.2)'],
+    'Miscellaneous': ['rgba(38, 160, 237, 0.9)', 'rgba(38, 160, 237, 0.2)'],
+}
+
+// Red Variant
+const groupOptionsColors = {
+    'Income': ['rgba(4, 190, 119, 0.9)', 'rgba(4, 190, 119, 0.2)'],
+    'Housing/Rent': ['rgba(248, 170, 170, 0.9)', 'rgba(248, 170, 170, 0.2)'],
+    'Periodic Bills': ['rgba(248, 170, 170, 0.9)', 'rgba(248, 170, 170, 0.2)'],
+    'Food': ['rgba(248, 170, 170, 0.9)', 'rgba(248, 170, 170, 0.2)'],
+    'Medical': ['rgba(248, 170, 170, 0.9)', 'rgba(248, 170, 170, 0.2)'],
+    'Transportation': ['rgba(255, 20, 61, 0.9)', 'rgba(255, 20, 61, 0.2)'],
+    'Taxes': ['rgba(255, 20, 61, 0.9)', 'rgba(255, 20, 61, 0.2)'],
+    'Insurance': ['rgba(255, 20, 61, 0.9)', 'rgba(255, 20, 61, 0.2)'],
+    'Short Purchases': ['rgba(153, 0, 27, 0.9)', 'rgba(153, 0, 27, 0.2)'],
+    'Consumer Durables': ['rgba(153, 0, 27, 0.9)', 'rgba(153, 0, 27, 0.2)'],
+    'Investment': ['rgba(51, 0, 9, 0.9)', 'rgba(51, 0, 9, 0.2)'],
+    'Recreational': ['rgba(51, 0, 9, 0.9)', 'rgba(51, 0, 9, 0.2)'],
+    'Miscellaneous': ['rgba(51, 0, 9, 0.9)', 'rgba(51, 0, 9, 0.2)'],
+}

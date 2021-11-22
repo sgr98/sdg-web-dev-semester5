@@ -43,19 +43,19 @@ const groupOptions = [
 ];
 
 const groupOptionsColors = {
-    'Income': ['rgba(38, 159, 66, 0.9)', 'rgba(38, 159, 66, 0.2)'],
-    'Housing/Rent': ['rgba(255, 194, 12, 0.9)', 'rgba(255, 194, 12, 0.2)'],
-    'Periodic Bills': ['rgba(255, 194, 12, 0.9)', 'rgba(255, 194, 12, 0.2)'],
-    'Food': ['rgba(255, 194, 12, 0.9)', 'rgba(255, 194, 12, 0.2)'],
-    'Medical': ['rgba(255, 194, 12, 0.9)', 'rgba(255, 194, 12, 0.2)'],
-    'Transportation': ['rgba(15, 80, 182, 0.9)', 'rgba(15, 80, 182, 0.2)'],
-    'Taxes': ['rgba(15, 80, 182, 0.9)', 'rgba(15, 80, 182, 0.2)'],
-    'Insurance': ['rgba(15, 80, 182, 0.9)', 'rgba(15, 80, 182, 0.2)'],
-    'Short Purchases': ['rgba(124, 43, 177, 0.9)', 'rgba(124, 43, 177, 0.2)'],
-    'Consumer Durables': ['rgba(124, 43, 177, 0.9)', 'rgba(124, 43, 177, 0.2)'],
-    'Investment': ['rgba(243, 115, 0, 0.9)', 'rgba(243, 115, 0, 0.2)'],
-    'Recreational': ['rgba(243, 115, 0, 0.9)', 'rgba(243, 115, 0, 0.2)'],
-    'Miscellaneous': ['rgba(243, 115, 0, 0.9)', 'rgba(243, 115, 0, 0.2)'],
+    'Income': ['rgba(4, 190, 119, 0.9)', 'rgba(4, 190, 119, 0.2)'],
+    'Housing/Rent': ['rgba(155, 201, 243, 0.9)', 'rgba(155, 201, 243, 0.2)'],
+    'Periodic Bills': ['rgba(155, 201, 243, 0.9)', 'rgba(155, 201, 243, 0.2)'],
+    'Food': ['rgba(155, 201, 243, 0.9)', 'rgba(155, 201, 243, 0.2)'],
+    'Medical': ['rgba(155, 201, 243, 0.9)', 'rgba(155, 201, 243, 0.2)'],
+    'Transportation': ['rgba(83, 161, 233, 0.9)', 'rgba(83, 161, 233, 0.2)'],
+    'Taxes': ['rgba(83, 161, 233, 0.9)', 'rgba(83, 161, 233, 0.2)'],
+    'Insurance': ['rgba(83, 161, 233, 0.9)', 'rgba(83, 161, 233, 0.2)'],
+    'Short Purchases': ['rgba(24, 111, 190, 0.9)', 'rgba(24, 111, 190, 0.2)'],
+    'Consumer Durables': ['rgba(24, 111, 190, 0.9)', 'rgba(24, 111, 190, 0.2)'],
+    'Investment': ['rgba(15, 69, 118, 0.9)', 'rgba(15, 69, 118, 0.2)'],
+    'Recreational': ['rgba(15, 69, 118, 0.9)', 'rgba(15, 69, 118, 0.2)'],
+    'Miscellaneous': ['rgba(15, 69, 118, 0.9)', 'rgba(15, 69, 118, 0.2)'],
 }
 
 const months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
@@ -133,7 +133,7 @@ const Transactions = ({
                             sx = {{ bgcolor: useColor[0] }}
                             // sx = {{ bgcolor: 'rgba(38, 159, 66, 0.2)' }}
                         >
-                            <Typography sx={{ fontSize: '150%' }}>{groupOpt}</Typography>
+                            <Typography sx={{ fontSize: '140%' }}>{groupOpt}</Typography>
                         </AccordionSummary>
                         <Divider />
                         <AccordionDetails sx={{ bgcolor: useColor[1] }}>
