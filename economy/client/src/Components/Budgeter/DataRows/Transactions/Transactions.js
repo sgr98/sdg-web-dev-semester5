@@ -95,6 +95,11 @@ const Transactions = ({
     const commaFormatAmount = (amt) => {
         if(amt === 0)
             return "0";
+
+        amt = amt.toFixed(2);
+        let fractionalAmt = amt - Math.floor(amt);
+        fractionalAmt = fractionalAmt.toFixed(2);
+        amt = Math.floor(amt);
             
         const isPositive = amt >= 0;
         if(!isPositive)
@@ -102,6 +107,10 @@ const Transactions = ({
             
         let comForAmt = "";
         let count = 1;
+
+        if(amt === 0)
+            comForAmt = "0";
+
         while(amt !== 0) {
             const n = amt % 10;
             comForAmt = n + comForAmt;
@@ -115,7 +124,14 @@ const Transactions = ({
         }
         
         if(!isPositive)
-            comForAmt = "- " + comForAmt
+            comForAmt = "- " + comForAmt;
+
+        if(fractionalAmt !== 0) {
+            comForAmt += ".";
+            const fract = fractionalAmt * 100;
+            comForAmt += fract.toString();
+        }
+
         return comForAmt;
     }
 
