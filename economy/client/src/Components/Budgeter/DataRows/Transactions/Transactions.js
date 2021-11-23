@@ -3,6 +3,7 @@ import {
     Accordion,
     AccordionSummary,
     AccordionDetails,
+    Container,
     Typography,
     Divider,
     IconButton,
@@ -11,7 +12,6 @@ import {
     Dialog,
     DialogTitle,
     DialogActions,
-    Container,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import EditIcon from '@mui/icons-material/Edit';
@@ -93,6 +93,13 @@ const Transactions = ({
 
     // Convert amount in international comma format
     const commaFormatAmount = (amt) => {
+        if(amt === 0)
+            return "0";
+            
+        const isPositive = amt >= 0;
+        if(!isPositive)
+            amt *= -1;
+            
         let comForAmt = "";
         let count = 1;
         while(amt !== 0) {
@@ -106,18 +113,19 @@ const Transactions = ({
             amt /= 10;
             amt = Math.floor(amt);
         }
-        if(comForAmt === "")
-            return "0";
+        
+        if(!isPositive)
+            comForAmt = "- " + comForAmt
         return comForAmt;
     }
 
     // Fot total savings
-    let savings = 0;
+    const savings = {sum: 0};
     const addTotalSavings = (transac) => {
         if(transac.group === 'Income')
-            savings += transac.amount;
+            savings.sum += transac.amount;
         else
-            savings -= transac.amount; 
+            savings.sum -= transac.amount; 
     }
 
     return (
@@ -225,7 +233,15 @@ const Transactions = ({
             })}
             <Container sx={budgeterSavingsContainer}>
                 <Typography variant="h6" sx={budgeterSavings}>
-                    Savings : {commaFormatAmount(savings / groupOptions.length)}
+                    Savings : {savings.sum < 0 ? 
+                        <>
+                            &#8722;{commaFormatAmount(-1 * savings.sum / groupOptions.length)} 
+                        </> 
+                        : 
+                        <> 
+                            {commaFormatAmount(savings.sum / groupOptions.length)} 
+                        </>
+                    }
                 </Typography>
             </Container>
         </div>
