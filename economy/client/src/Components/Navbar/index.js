@@ -137,7 +137,6 @@ const Navbar = () => {
                                 style={{ margin: '0 0 0 0.75rem' }}
                                 component={Link}
                                 to="/auth"
-                                onClick={() => {console.log(location.pathname)}}
                             >
                                 Sign In
                             </Button>
