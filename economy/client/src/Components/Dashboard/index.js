@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import {
     Box,
     Container,
@@ -13,6 +14,8 @@ import {
 import { Link } from 'react-router-dom';
 import CalculateOutlinedIcon from '@mui/icons-material/CalculateOutlined';
 import BarChartOutlinedIcon from '@mui/icons-material/BarChartOutlined';
+
+// import { setSidebarDate } from '../../actions/sidebarDate';
 
 const months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
 const tempDates = ["NOV 2021", "DEC 2021", "JAN 2022", "FEB 2022", 
@@ -44,10 +47,15 @@ const Dashboard = () => {
         }
     }
 
+    const dispatch = useDispatch();
     const [sideBarDateText, setSideBarDateText] = useState(getMonthYear(new Date()));
+    // localStorage.setItem('sideDate', JSON.stringify({sideBarDateText: sideBarDateText}))
 
     const setSideBarDate = (text) => {
         setSideBarDateText(text);
+        // dispatch(setSidebarDate(text));
+        const sideBarDate = {sideBarDateText: text}
+        localStorage.setItem('sideDate', JSON.stringify(sideBarDate))
     }
 
     const [sidebarStatus, setSidebarStatus] = useState(false);

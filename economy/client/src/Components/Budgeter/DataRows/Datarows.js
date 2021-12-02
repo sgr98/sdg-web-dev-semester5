@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Button, Container} from '@mui/material';
+import { Button, Container, Typography} from '@mui/material';
 import RefreshIcon from '@mui/icons-material/Refresh';
 
 import {
@@ -30,10 +30,6 @@ const Datarows = () => {
     const dispatch = useDispatch();
     const user_transactions = useSelector((state) => state.transactions);
     // console.log(user_transactions);
-    
-    useEffect(() => {
-        dispatch(getBudgeterTransactions(user.result._id.toString()));
-    }, [transacId, dispatch]);
 
     // //////////////////////////////////////////////////
     // Modal
@@ -103,10 +99,27 @@ const Datarows = () => {
         dispatch(deleteTransaction(user.result._id.toString(), id, temp));
     }
 
+    // //////////////////////////////////////////////////
+    // Sidebar Date Text
+    // //////////////////////////////////////////////////
+
+    const [sideBarDate, setSideBarDate] = useState(
+        JSON.parse(localStorage.getItem('sideDate'))
+    );
+
+    // console.log("Datarows")
+    // console.log(sideBarDate)
+    
+    useEffect(() => {
+        dispatch(getBudgeterTransactions(user.result._id.toString()));
+        setSideBarDate( prevData => JSON.parse(localStorage.getItem('sideDate')))
+    }, [transacId, dispatch]);
+
     const [makeEntryDiabled, setMakeEntryDiabled] = useState(false);
 
     return (
         <div className="Datarows-Container">
+            {/* <Typography>{sideBarDate.sideBarDateText}</Typography> */}
             <Button
                 fullWidth
                 variant="contained"
