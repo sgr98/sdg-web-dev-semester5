@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import  { Redirect } from 'react-router-dom'
 // import { Box, AppBar, Typography, Toolbar, Button } from '@mui/material';
 import { Container } from '@mui/material';
 import {
@@ -154,6 +155,10 @@ const Analytics = () => {
 
     // const date = new Date()
     // console.log(date.getDate(), date.getHours())
+
+    if(user === null) {
+        return <Redirect to="/auth" />
+    }
 
     return (
         <div className="Analytics-Container">

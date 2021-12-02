@@ -103,11 +103,14 @@ const Datarows = () => {
         dispatch(deleteTransaction(user.result._id.toString(), id, temp));
     }
 
+    const [makeEntryDiabled, setMakeEntryDiabled] = useState(false);
+
     return (
         <div className="Datarows-Container">
             <Button
                 fullWidth
                 variant="contained"
+                disabled={makeEntryDiabled}
                 onClick={() => {
                     handleModalOpen();
                     clearModal();
