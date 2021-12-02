@@ -215,6 +215,7 @@ const Transactions = ({
                                                     size="small"
                                                     sx={{ width: '6%' }}
                                                     onClick={() => handleDelete(transac._id)}
+                                                    // onCLick={handleDeleteDialogOpen}
                                                 >
                                                     <DeleteIcon />
                                                 </IconButton>

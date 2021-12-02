@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Button} from '@mui/material';
+import { Button, Container} from '@mui/material';
+import RefreshIcon from '@mui/icons-material/Refresh';
 
 import {
     getBudgeterTransactions,
@@ -104,19 +105,6 @@ const Datarows = () => {
 
     return (
         <div className="Datarows-Container">
-            {/* <Button
-                fullWidth
-                variant="outlined"
-                onClick={() =>
-                    dispatch(
-                        getBudgeterTransactions(user.result._id.toString())
-                    )
-                }
-                sx={{marginBottom: '2rem'}}
-            >
-                Get Entries
-            </Button> */}
-
             <Button
                 fullWidth
                 variant="contained"
@@ -128,6 +116,20 @@ const Datarows = () => {
                 sx={{ marginBottom: '2rem', height: '42px' }}
             >
                 Make an entry
+            </Button>
+
+            <Button
+                size='medium'
+                variant="outlined"
+                onClick={() =>
+                    dispatch(
+                        getBudgeterTransactions(user.result._id.toString())
+                    )
+                }
+                sx={{marginBottom: '0.5rem'}}
+            >
+                <Container>Refresh</Container>
+                <RefreshIcon fontSize='small'/>
             </Button>
 
             <TransactionModal

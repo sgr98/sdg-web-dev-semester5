@@ -100,7 +100,7 @@ const options = {
     },
 };
   
-const labels = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC', 'hh', 'hh1'];
+const labels = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
   
 const data = {
     labels,
@@ -152,12 +152,15 @@ const Analytics = () => {
         }),
     };
 
+    // const date = new Date()
+    // console.log(date.getDate(), date.getHours())
+
     return (
         <div className="Analytics-Container">
             <Dashboard />
-            <Container>
+            <Container sx = {{ margin: '1rem' }}>
                 {/* {user_transactions.user_economy ? user_transactions.user_economy.toString() : null} */}
-                <Line options={options} data={data1} />;
+                <Line options={options} data={data} />;
             </Container>
         </div>
     );
