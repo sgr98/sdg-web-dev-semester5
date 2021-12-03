@@ -21,6 +21,7 @@ const Authentication = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [isSignUp, setIsSignUp] = useState(false);
     const [formData, setFormData] = useState(initialState);
+    // const [errorMessage, setErrorMessage] = useState(false);
 
     const dispatch = useDispatch();
     const history = useHistory();
@@ -109,6 +110,15 @@ const Authentication = () => {
                             />
                         )}
                     </Grid>
+                    {/* <Typography 
+                        disabled={errorMessage} 
+                        sx={{
+                            color: '#f40f11',
+                            fontSize: '80%'
+                        }}
+                    >
+                        Error Message *
+                    </Typography> */}
                     <Button
                         className="Auth-Sign-Button"
                         type="submit"

@@ -12,6 +12,24 @@ API.interceptors.request.use((req) => {         // Adds something to all the API
     return req;
 })
 
+API.interceptors.response.use((response) => {
+    if(response.status === 404) {
+         alert("Some user declined Error");
+    }
+    if(response.status === 400) {
+        alert("Some error");
+    }
+    if(response.status === 400) {
+        alert("some error");
+    }
+    return response;
+}, (error) => {
+    if (error.response && error.response.data) {
+        return Promise.reject(error.response.data);
+    }
+    return Promise.reject(error.message);
+});
+
 // Authentication 
 export const signIn = (formData) => API.post('/user/signin', formData);
 export const signUp = (formData) => API.post('/user/signup', formData);

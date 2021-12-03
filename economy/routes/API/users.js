@@ -144,7 +144,7 @@ router.post('/signin', async (req, res) => {
         );
         if (!isPasswordCorrect) {
             console.log('Incorrect Passowrd');
-            return res.status(404).json({ msg: 'Invalid Credentials.' });
+            return res.status(404).json({ msg: 'Invalid Password.' });
         }
 
         const token = jwt.sign(
