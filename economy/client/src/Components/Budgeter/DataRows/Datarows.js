@@ -9,6 +9,7 @@ import {
     updateTransaction,
     deleteTransaction,
 } from '../../../actions/transactions';
+import { getMonthYear } from '../../../Functions/date';
 import './styles.css';
 
 import TransactionModal from './TransactionModal/TransactionModal';
@@ -30,10 +31,6 @@ const Datarows = () => {
     const dispatch = useDispatch();
     const user_transactions = useSelector((state) => state.transactions);
     // console.log(user_transactions);
-
-    useEffect(() => {
-        dispatch(getBudgeterTransactions(user.result._id.toString()));
-    }, [transacId, dispatch]);
 
     // //////////////////////////////////////////////////
     // Modal
@@ -109,11 +106,17 @@ const Datarows = () => {
 
     const sidebarDate = useSelector((state) => state.sidebardate);
 
-    const [makeEntryDiabled, setMakeEntryDiabled] = useState(false);
+    const [makeEntryDiabled, setMakeEntryDiabled] = useState(
+        !( sidebarDate.sideBarDateText === getMonthYear(new Date()) )
+    );
+
+    useEffect(() => {
+        dispatch(getBudgeterTransactions(user.result._id.toString()));
+        setMakeEntryDiabled(!( sidebarDate.sideBarDateText === getMonthYear(new Date()) ))
+    }, [transacId, dispatch, sidebarDate.sideBarDateText]);
 
     return (
         <div className="Datarows-Container">
-            <Typography>{sidebarDate.sideBarDateText}</Typography>
             <Button
                 fullWidth
                 variant="contained"
