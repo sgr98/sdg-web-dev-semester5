@@ -50,3 +50,24 @@ const groupOptionsColors = {
     'Recreational': ['rgba(51, 0, 9, 0.9)', 'rgba(51, 0, 9, 0.2)'],
     'Miscellaneous': ['rgba(51, 0, 9, 0.9)', 'rgba(51, 0, 9, 0.2)'],
 }
+
+
+
+// data1
+
+const data1 = {
+    labels: labels1,
+    datasets: groupOptions.map((groupOpt) => {
+        return ({
+            label: groupOpt,
+            data: user_transactions.user_economy ? 
+                user_transactions.user_economy.map((transac) => {
+                    if(transac.group === groupOpt)
+                        return transac.amount
+                })
+                : [],
+            borderColor: groupOptionsColors[groupOpt][0],
+            backgroundColor: groupOptionsColors[groupOpt][1],
+        });
+    }),
+};

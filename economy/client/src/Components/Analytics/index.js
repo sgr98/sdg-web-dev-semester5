@@ -17,6 +17,12 @@ import { Line } from 'react-chartjs-2';
 
 import Dashboard from '../Dashboard';
 import { getAnalyticsTransactions } from '../../actions/transactions';
+import { 
+    getDate, 
+    getMonthYear, 
+    getMonthFromMonthYear, 
+    getyearFromMonthYear 
+} from '../../Functions/date';
 import './styles.css';
 
 ChartJS.register(
@@ -43,7 +49,7 @@ const getDayInFebruary = (year) => {
 
 const daysInMonths = {
     'JAN': 31,
-    'FEB': getDayInFebruary(2021),
+    'FEB': 28,
     'MAR': 31,
     'APR': 30,
     'MAY': 31,
@@ -56,36 +62,19 @@ const daysInMonths = {
     'DEC': 31
 };
 
-const groupOptions = [
-    'Income',
-    'Housing/Rent',
-    'Periodic Bills',
-    'Food',
-    'Medical',
-    'Transportation',
-    'Taxes',
-    'Insurance',
-    'Short Purchases',
-    'Consumer Durables',
-    'Investment',
-    'Recreational',
-    'Miscellaneous',
-];
+// Income           :   Income
+// Necessities      :   Housing/Rent, Periodic Bills, Food, Medical
+// Essentials       :   Transportation, Taxes, Insurance
+// Semi-Essentials  :   Short Purchases, Consumer Durables
+// Luxuries         :   Investment, Recreational, Miscellaneous
 
 const groupOptionsColors = {
     'Income': ['rgba(4, 190, 119, 1)', 'rgba(4, 190, 119, 0.5)'],
-    'Housing/Rent': ['rgba(155, 201, 243, 1)', 'rgba(155, 201, 243, 0.5)'],
-    'Periodic Bills': ['rgba(155, 201, 243, 1)', 'rgba(155, 201, 243, 0.5)'],
-    'Food': ['rgba(155, 201, 243, 1)', 'rgba(155, 201, 243, 0.5)'],
-    'Medical': ['rgba(155, 201, 243, 1)', 'rgba(155, 201, 243, 0.5)'],
-    'Transportation': ['rgba(83, 161, 233, 1)', 'rgba(83, 161, 233, 0.5)'],
-    'Taxes': ['rgba(83, 161, 233, 1)', 'rgba(83, 161, 233, 0.5)'],
-    'Insurance': ['rgba(83, 161, 233, 1)', 'rgba(83, 161, 233, 0.5)'],
-    'Short Purchases': ['rgba(24, 111, 190, 1)', 'rgba(24, 111, 190, 0.5)'],
-    'Consumer Durables': ['rgba(24, 111, 190, 1)', 'rgba(24, 111, 190, 0.5)'],
-    'Investment': ['rgba(15, 69, 118, 1)', 'rgba(15, 69, 118, 0.5)'],
-    'Recreational': ['rgba(15, 69, 118, 1)', 'rgba(15, 69, 118, 0.5)'],
-    'Miscellaneous': ['rgba(15, 69, 118, 1)', 'rgba(15, 69, 118, 0.5)'],
+    'Necessities': ['rgba(155, 201, 243, 1)', 'rgba(155, 201, 243, 0.5)'],
+    'Essentials': ['rgba(83, 161, 233, 1)', 'rgba(83, 161, 233, 0.5)'],
+    'Semi-Essentials': ['rgba(24, 111, 190, 1)', 'rgba(24, 111, 190, 0.5)'],
+    'Luxuries': ['rgba(15, 69, 118, 1)', 'rgba(15, 69, 118, 0.5)'],
+    'Savings Remaining': ['rgba(205, 25, 25, 1)', 'rgba(205, 25, 25, 0.5)']
 }
 
 const options = {
@@ -96,29 +85,9 @@ const options = {
         },
         title: {
             display: true,
-            text: 'Chart.js Line Chart',
+            text: 'Economy Line Chart',
         },
     },
-};
-  
-const labels = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
-  
-const data = {
-    labels,
-    datasets: [
-        {
-            label: 'Dataset 1',
-            data: [324, 45, 475, -56, 888, 465, 500],
-            borderColor: 'rgb(255, 99, 132)',
-            backgroundColor: 'rgba(255, 99, 132, 0.5)',
-        },
-        {
-            label: 'Dataset 2',
-            data: [0, 821, 255, -100, 689, 512, 350],
-            borderColor: 'rgb(53, 162, 235)',
-            backgroundColor: 'rgba(53, 162, 235, 0.5)',
-        },
-    ],
 };
 
 const Analytics = () => {
@@ -137,34 +106,152 @@ const Analytics = () => {
         dispatch(getAnalyticsTransactions(user.result._id.toString()));
     }, [dispatch]);
 
-    // Building the dataset
-    // const userTransacs = user_transactions.user_economy ? user_transactions.user_economy : null
-    // const filterUserTransacs = userTransacs ?
-    //     userTransacs.filter((transac) => {
-    //         const monYear = getMonthYear(transac.createdAt);
-    //         return monYear === sidebarDate.sideBarDateText;
-    //     })
-    //     : null;
+    // ===========================================
+    // BUILDING THE DATASET
+    // ===========================================
+    const mon = getMonthFromMonthYear(sidebarDate.sideBarDateText);
+    const yea = getyearFromMonthYear(sidebarDate.sideBarDateText);
+    const createLabels = () => {
+        let arr = [];
+        if(mon === "FEB") {
+            for(let i = 1; i <= getDayInFebruary(yea); i++)
+                arr.push(i)
+        }
+        else {
+            for(let i = 1; i <= daysInMonths[mon]; i++)
+                arr.push(i)
+        }
+        return arr;
+    }
+    const labels = createLabels();
 
-    const data1 = {
+    const userTransacs = user_transactions.user_economy ? user_transactions.user_economy : null
+    const filterUserTransacs = userTransacs ?
+        userTransacs.filter((transac) => {
+            const monYear = getMonthYear(transac.createdAt);
+            return monYear === sidebarDate.sideBarDateText;
+        })
+        : null;
+
+    const initializeChartData = () => {
+        let data = [];
+        for(let i = 0; i < labels.length; i++)
+            data.push(0);
+        return data;
+    }
+
+// Income           :   Income
+// Necessities      :   Housing/Rent, Periodic Bills, Food, Medical
+// Essentials       :   Transportation, Taxes, Insurance
+// Semi-Essentials  :   Short Purchases, Consumer Durables
+// Luxuries         :   Investment, Recreational, Miscellaneous
+
+    const setChartData = (megaGroup) => {
+        let data = initializeChartData();
+        const temp = filterUserTransacs ? 
+            filterUserTransacs.forEach((filtTransac) => {
+                const filtDate = parseInt(getDate(filtTransac.createdAt));
+                switch(megaGroup) {
+                    case "Income":
+                        if(filtTransac.group === "Income")
+                            data[filtDate - 1] += filtTransac.amount;
+                        break;
+                    case "Necessities":
+                        if( filtTransac.group === "Housing/Rent" || 
+                            filtTransac.group === "Periodic Bills" ||
+                            filtTransac.group === "Food" || 
+                            filtTransac.group === "Medical" )
+                            data[filtDate - 1] += filtTransac.amount;
+                        break;
+                    case "Essentials":
+                        if( filtTransac.group === "Transportation" || 
+                            filtTransac.group === "Taxes" ||
+                            filtTransac.group === "Insurance" )
+                            data[filtDate - 1] += filtTransac.amount;
+                        break;
+                    case "Semi-Essentials":
+                        if( filtTransac.group === "Short Purchases" || 
+                            filtTransac.group === "Consumer Durables" )
+                            data[filtDate - 1] += filtTransac.amount;
+                        break;
+                    case "Luxuries":
+                        if( filtTransac.group === "Investment" || 
+                            filtTransac.group === "Recreational" ||
+                            filtTransac.group === "Miscellaneous" )
+                            data[filtDate - 1] += filtTransac.amount;
+                        break;
+                    default:
+                        break;
+                }
+            })
+        : null;
+        return data;
+    }
+
+    const setSavingsChartData = () => {
+        let data = initializeChartData();
+        let filtDateIndex = 0;
+
+        const temp = filterUserTransacs ? 
+            filterUserTransacs.forEach((filtTransac) => {
+                const filtDate = parseInt(getDate(filtTransac.createdAt));
+                if(filtDateIndex != filtDate - 1) {
+                    if(filtDateIndex != 0) {
+                        for(let i = filtDateIndex + 1; i <= filtDate - 1; i++)
+                            data[i] += data[i - 1];
+                    }
+                    filtDateIndex = filtDate - 1;
+                }
+                if( filtTransac.group === "Income" )
+                    data[filtDateIndex] += filtTransac.amount;
+                else
+                    data[filtDateIndex] -= filtTransac.amount;
+            })
+        : null;
+
+        for(let i = filtDateIndex + 1; i < labels.length; i++)
+            data[i] += data[i - 1];
+        return data;
+    }
+    
+    const displayTransacData = [
+        {
+            "megaGroup": "Income",
+            data: setChartData("Income"),
+        },
+        {   
+            "megaGroup": "Necessities",
+            data: setChartData("Necessities"),
+        },
+        {   
+            "megaGroup": "Essentials",
+            data: setChartData("Essentials"),
+        },
+        {
+            "megaGroup": "Semi-Essentials",
+            data: setChartData("Semi-Essentials"),
+        },
+        {
+            "megaGroup": "Luxuries",
+            data: setChartData("Luxuries"),
+        },
+        {
+            "megaGroup": "Savings Remaining",
+            data: setSavingsChartData(),
+        },
+    ];
+
+    const data = {
         labels,
-        datasets: groupOptions.map((groupOpt) => {
+        datasets: displayTransacData.map((dispData) => {
             return ({
-                label: groupOpt,
-                data: user_transactions.user_economy ? 
-                    user_transactions.user_economy.map((transac) => {
-                        if(transac.group === groupOpt)
-                            return transac.amount
-                    })
-                    : [],
-                borderColor: groupOptionsColors[groupOpt][0],
-                backgroundColor: groupOptionsColors[groupOpt][1],
+                label: dispData.megaGroup,
+                data: dispData.data,
+                borderColor: groupOptionsColors[dispData.megaGroup][0],
+                backgroundColor: groupOptionsColors[dispData.megaGroup][1],
             });
         }),
     };
-
-    // const date = new Date()
-    // console.log(date.getDate(), date.getHours())
 
     if(user === null) {
         return <Redirect to="/auth" />
@@ -172,11 +259,10 @@ const Analytics = () => {
 
     return (
         <div className="Analytics-Container">
-            <div>{sidebarDate.sideBarDateText}</div>
+            {/* <div>{sidebarDate.sideBarDateText}</div> */}
             <Dashboard />
             <Container sx = {{ margin: '1rem' }}>
-                {/* {user_transactions.user_economy ? user_transactions.user_economy.toString() : null} */}
-                <Line options={options} data={data} />;
+                <Line options={options} data={data} />
             </Container>
         </div>
     );

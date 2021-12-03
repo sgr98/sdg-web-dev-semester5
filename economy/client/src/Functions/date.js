@@ -1,12 +1,12 @@
 export const months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
 
-// Get date from date string
+// Get date from Date.now() date string
 export const getDate = (date) => {
     const dat = date.split("T")[0];
     return dat.split("-")[2];
 }
 
-// Get month from date string
+// Get month from Date.now() date string
 export const getMonth = (date) => {
     const dat = date.split("T")[0];
     const mon = parseInt(dat.split("-")[1]);
@@ -31,4 +31,16 @@ export const getMonthYear = (date) => {
         const dat = months[mon] + " " + year.toString();
         return dat;
     }
+}
+
+// Get month from monthYear date string
+export const getMonthFromMonthYear = (dateStr) => {
+    const monYear = dateStr.split(" ");
+    return monYear[0];
+}
+
+// Get year from monthYear date string
+export const getyearFromMonthYear = (dateStr) => {
+    const monYear = dateStr.split(" ");
+    return monYear[1];
 }
