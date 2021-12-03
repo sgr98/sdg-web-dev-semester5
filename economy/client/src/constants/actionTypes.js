@@ -9,5 +9,4 @@ export const UPDATE_TRANSACTION = "UPDATE_TRANSACTION";
 export const DELETE_TRANSACTION = "DELETE_TRANSACTION";
 
 // Sidebar Date Constants
-export const GET_SIDEBAR_DATE = "GET_SIDEBAR_DATE";
 export const SET_SIDEBAR_DATE = "SET_SIDEBAR_DATE";

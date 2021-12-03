@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import {
     Box,
-    Container,
     Grid,
     Button,
     SwipeableDrawer,
@@ -15,47 +14,21 @@ import { Link } from 'react-router-dom';
 import CalculateOutlinedIcon from '@mui/icons-material/CalculateOutlined';
 import BarChartOutlinedIcon from '@mui/icons-material/BarChartOutlined';
 
-// import { setSidebarDate } from '../../actions/sidebarDate';
+import { setSidebarDate } from '../../actions/sidebarDate';
 
-const months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
 const tempDates = ["NOV 2021", "DEC 2021", "JAN 2022", "FEB 2022", 
     "MAR 2022", "APR 2022", "MAY 2022", "JUN 2022", "JUL 2022", 
     "AUG 2022", "SEP 2022", "OCT 2022", "NOV 2022", "DEC 2022"];
 
 const Dashboard = () => {
-    const getMonth = (date) => {
-        const dat = date.split("T")[0];
-        const mon = parseInt(dat.split("-")[1]);
-        return months[mon - 1];
-    }
-
-    const getYear = (date) => {
-        const dat = date.split("T")[0];
-        return dat.split("-")[0];
-    }
-
-    const getMonthYear = (date) => {
-        if(typeof date === "string") {
-            const dat = getMonth(date) + " " + getYear(date);
-            return dat;
-        }
-        else {
-            const mon = date.getMonth();
-            const year = date.getFullYear();
-            const dat = months[mon] + " " + year.toString();
-            return dat;
-        }
-    }
+    const sidebarDate = useSelector((state) => state.sidebardate);
 
     const dispatch = useDispatch();
-    const [sideBarDateText, setSideBarDateText] = useState(getMonthYear(new Date()));
-    // localStorage.setItem('sideDate', JSON.stringify({sideBarDateText: sideBarDateText}))
+    const [sideBarDateText, setSideBarDateText] = useState(sidebarDate.sideBarDateText);
 
     const setSideBarDate = (text) => {
         setSideBarDateText(text);
-        // dispatch(setSidebarDate(text));
-        const sideBarDate = {sideBarDateText: text}
-        localStorage.setItem('sideDate', JSON.stringify(sideBarDate))
+        dispatch(setSidebarDate(text));
     }
 
     const [sidebarStatus, setSidebarStatus] = useState(false);

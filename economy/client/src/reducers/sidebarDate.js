@@ -1,27 +1,20 @@
-// ============================ //
-// ========== UNUSED ========== //
-// ============================ //
-
 import {
     SET_SIDEBAR_DATE,
 } from '../constants/actionTypes';
 
+import { getMonthYear } from '../Functions/date';
+
+let initialState = {
+    sideBarDateText: getMonthYear(new Date())
+}
+
 // Redux Reducer for sidebar date string
-const sideBarDateReducer = (sideBarDate = {sideBarDateText: ""}, action) => {
+const sideBarDateReducer = (currentState = initialState, action) => {
     switch (action.type) {
         case SET_SIDEBAR_DATE:
-            let existing = localStorage.getItem('sideDate');
-            existing = existing ? JSON.parse(existing) : {};
-            console.log("existing")
-            console.log(existing)
-            // existing['sideBarDateText'] = action.payload.sideBarDateText;
-            // // Add new data to localStorage Array
-            // existing[key] = value;
-
-            localStorage.setItem('sideDate', JSON.stringify({...existing}))
-            return {...sideBarDate, sideBarDateText: action.payload};
+            return {...currentState, sideBarDateText: action.payload};
         default:
-            return sideBarDate;
+            return currentState;
     }
 };
 

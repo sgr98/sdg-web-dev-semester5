@@ -31,6 +31,10 @@ const Datarows = () => {
     const user_transactions = useSelector((state) => state.transactions);
     // console.log(user_transactions);
 
+    useEffect(() => {
+        dispatch(getBudgeterTransactions(user.result._id.toString()));
+    }, [transacId, dispatch]);
+
     // //////////////////////////////////////////////////
     // Modal
     // //////////////////////////////////////////////////
@@ -103,23 +107,13 @@ const Datarows = () => {
     // Sidebar Date Text
     // //////////////////////////////////////////////////
 
-    const [sideBarDate, setSideBarDate] = useState(
-        JSON.parse(localStorage.getItem('sideDate'))
-    );
-
-    // console.log("Datarows")
-    // console.log(sideBarDate)
-    
-    useEffect(() => {
-        dispatch(getBudgeterTransactions(user.result._id.toString()));
-        setSideBarDate( prevData => JSON.parse(localStorage.getItem('sideDate')))
-    }, [transacId, dispatch]);
+    const sidebarDate = useSelector((state) => state.sidebardate);
 
     const [makeEntryDiabled, setMakeEntryDiabled] = useState(false);
 
     return (
         <div className="Datarows-Container">
-            {/* <Typography>{sideBarDate.sideBarDateText}</Typography> */}
+            <Typography>{sidebarDate.sideBarDateText}</Typography>
             <Button
                 fullWidth
                 variant="contained"

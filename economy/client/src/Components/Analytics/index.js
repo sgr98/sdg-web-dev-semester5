@@ -130,12 +130,16 @@ const Analytics = () => {
     const dispatch = useDispatch();
     const user_transactions = useSelector((state) => state.transactions);
     // console.log(user_transactions);
+    const sidebarDate = useSelector((state) => state.sidebardate);
+    // console.log(sidebarDate)
     
     useEffect(() => {
         dispatch(getAnalyticsTransactions(user.result._id.toString()));
     }, [dispatch]);
 
     // Building the dataset
+    // const userTransacs = user_transactions.user_economy ? user_transactions.user_economy : []
+
     const data1 = {
         labels,
         datasets: groupOptions.map((groupOpt) => {
@@ -162,6 +166,7 @@ const Analytics = () => {
 
     return (
         <div className="Analytics-Container">
+            <div>{sidebarDate.sideBarDateText}</div>
             <Dashboard />
             <Container sx = {{ margin: '1rem' }}>
                 {/* {user_transactions.user_economy ? user_transactions.user_economy.toString() : null} */}
