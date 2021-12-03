@@ -17,6 +17,8 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 
+import { getDate, getMonth } from '../../../../Functions/date';
+
 import { 
     budgeterDropdownBox, 
     budgeterTitleBox, 
@@ -77,19 +79,6 @@ const Transactions = ({
       const handleDeleteDialogClose = () => {
         setOpenDeleteDialog(false);
     };
-
-    // Get date from row Data
-    const getDate = (date) => {
-        const dat = date.split("T")[0];
-        return dat.split("-")[2];
-    }
-
-    // Get month from row Data
-    const getMonth = (date) => {
-        const dat = date.split("T")[0];
-        const mon = parseInt(dat.split("-")[1]);
-        return months[mon - 1];
-    }
 
     // Convert amount in international comma format
     const commaFormatAmount = (amt) => {
