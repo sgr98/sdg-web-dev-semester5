@@ -2,9 +2,12 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors')
 const config = require('config');
+const dotenv = require('dotenv');
+
 // const { deleteOne } = require('./models/User');
 
 const app = express();
+dotenv.config();
 
 // Express Parser Middleware
 app.use(express.json({ extended: true }));
@@ -17,7 +20,7 @@ app.use('/dashboard', require('./routes/API/user_transactions'))  // Add a route
 
 // DB Config
 // Extracting the value of mongoURI from ./config/default.json
-const dbURI = config.get('mongoURI');   //===> Change it later to system variable
+const dbURI = process.env.CONNECTION_URL;   //===> Change it later to system variable
 
 // ES6 Promises (for enabling Mocha Testig)
 mongoose.Promise = global.Promise;
