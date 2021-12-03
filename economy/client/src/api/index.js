@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API = axios.create({ baseURL: 'http://localhost:5000' });
+const API = axios.create({ baseURL: 'https://hbe-project.herokuapp.com' });
 
 API.interceptors.request.use((req) => {         // Adds something to all the API requests
     // If a token is generated, attach it to the authorization header 

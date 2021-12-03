@@ -18,6 +18,10 @@ app.use(cors())
 app.use('/user', require('./routes/API/users'))  // Add a route later
 app.use('/dashboard', require('./routes/API/user_transactions'))  // Add a route later
 
+app.get('/', (req, res) => {
+    res.send("Hello to HBE API");
+});
+
 // DB Config
 // Extracting the value of mongoURI from ./config/default.json
 const dbURI = process.env.CONNECTION_URL;   //===> Change it later to system variable
@@ -37,6 +41,13 @@ const connectDB = async () => {
 };
 connectDB();
 
+if(process.env.NODE_ENV==="prodution"){
+    app.use(express.static("client/build"));
+    app.get("/*", (req, res) => {
+        res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+    });
+}
+
 // Assign and listent to the port
-const port = process.env.port || 5000;
+const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Server started on port ${port}`));
