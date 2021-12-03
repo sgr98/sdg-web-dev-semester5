@@ -8,7 +8,6 @@ import {
     List,
     ListItem,
     ListItemText,
-    Divider,
 } from '@mui/material';
 import { Link } from 'react-router-dom';
 import CalculateOutlinedIcon from '@mui/icons-material/CalculateOutlined';
@@ -33,6 +32,7 @@ const Dashboard = () => {
 
     const [sidebarStatus, setSidebarStatus] = useState(false);
 
+    // Toggle Sidebar 
     const toggleDrawer = (anchor, open) => (event) => {
         if (event && event.type === 'keydown' 
             && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -41,6 +41,7 @@ const Dashboard = () => {
         setSidebarStatus(open);
     };
 
+    // Creating Sidebar list
     const sideBarDateList = (anchor) => (
         <Box
             sx={{ 

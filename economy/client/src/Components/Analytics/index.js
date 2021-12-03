@@ -35,6 +35,7 @@ ChartJS.register(
     Legend
 );
 
+// Returns number of days in February given a year
 const getDayInFebruary = (year) => {
     if(year % 4 === 0) {
         if(year % 100 === 0) {
@@ -77,6 +78,7 @@ const groupOptionsColors = {
     'Savings Remaining': ['rgba(205, 25, 25, 1)', 'rgba(205, 25, 25, 0.5)']
 }
 
+// Options for Line Chart
 const options = {
     responsive: true,
     plugins: {
@@ -111,6 +113,7 @@ const Analytics = () => {
     // ===========================================
     const mon = getMonthFromMonthYear(sidebarDate.sideBarDateText);
     const yea = getyearFromMonthYear(sidebarDate.sideBarDateText);
+    // Create labels for dataset to be presented in Linechart
     const createLabels = () => {
         let arr = [];
         if(mon === "FEB") {
@@ -133,6 +136,7 @@ const Analytics = () => {
         })
         : null;
 
+    // Create and Initialize data in dataset to 0
     const initializeChartData = () => {
         let data = [];
         for(let i = 0; i < labels.length; i++)
@@ -140,12 +144,7 @@ const Analytics = () => {
         return data;
     }
 
-// Income           :   Income
-// Necessities      :   Housing/Rent, Periodic Bills, Food, Medical
-// Essentials       :   Transportation, Taxes, Insurance
-// Semi-Essentials  :   Short Purchases, Consumer Durables
-// Luxuries         :   Investment, Recreational, Miscellaneous
-
+    // Set Chart data in dataset
     const setChartData = (megaGroup) => {
         let data = initializeChartData();
         const temp = filterUserTransacs ? 
@@ -188,6 +187,7 @@ const Analytics = () => {
         return data;
     }
 
+    // Set Savings Chart data in dataset
     const setSavingsChartData = () => {
         let data = initializeChartData();
         let filtDateIndex = 0;
@@ -195,8 +195,8 @@ const Analytics = () => {
         const temp = filterUserTransacs ? 
             filterUserTransacs.forEach((filtTransac) => {
                 const filtDate = parseInt(getDate(filtTransac.createdAt));
-                if(filtDateIndex != filtDate - 1) {
-                    if(filtDateIndex != 0) {
+                if(filtDateIndex !== filtDate - 1) {
+                    if(filtDateIndex !== 0) {
                         for(let i = filtDateIndex + 1; i <= filtDate - 1; i++)
                             data[i] += data[i - 1];
                     }
@@ -214,6 +214,7 @@ const Analytics = () => {
         return data;
     }
     
+    // Data for dataset
     const displayTransacData = [
         {
             "megaGroup": "Income",
@@ -241,6 +242,7 @@ const Analytics = () => {
         },
     ];
 
+    // Parametric data for the Line Chart tag
     const data = {
         labels,
         datasets: displayTransacData.map((dispData) => {
@@ -259,7 +261,6 @@ const Analytics = () => {
 
     return (
         <div className="Analytics-Container">
-            {/* <div>{sidebarDate.sideBarDateText}</div> */}
             <Dashboard />
             <Container sx = {{ margin: '1rem' }}>
                 <Line options={options} data={data} />

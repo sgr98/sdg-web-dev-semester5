@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Button, Container, Typography} from '@mui/material';
+import { Button, Container } from '@mui/material';
+// import { Typography} from '@mui/material';
 import RefreshIcon from '@mui/icons-material/Refresh';
 
 import {
@@ -106,13 +107,14 @@ const Datarows = () => {
 
     const sidebarDate = useSelector((state) => state.sidebardate);
 
-    const [makeEntryDiabled, setMakeEntryDiabled] = useState(
+    // Enable button only when selected month is current month
+    const [makeEntryDiabled, setMakeEntryDisabled] = useState(
         !( sidebarDate.sideBarDateText === getMonthYear(new Date()) )
     );
 
     useEffect(() => {
         dispatch(getBudgeterTransactions(user.result._id.toString()));
-        setMakeEntryDiabled(!( sidebarDate.sideBarDateText === getMonthYear(new Date()) ))
+        setMakeEntryDisabled(!( sidebarDate.sideBarDateText === getMonthYear(new Date()) ))
     }, [transacId, dispatch, sidebarDate.sideBarDateText]);
 
     return (

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
     Accordion,
     AccordionSummary,
@@ -7,12 +7,14 @@ import {
     Typography,
     Divider,
     IconButton,
-    Button,
     Box,
-    Dialog,
-    DialogTitle,
-    DialogActions,
 } from '@mui/material';
+// import {
+//     Button,
+//     Dialog,
+//     DialogTitle,
+//     DialogActions,
+// } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -71,11 +73,13 @@ const Transactions = ({
 }) => {
     const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
 
+    // Open Delete Dialog
     const handleDeleteDialogOpen = () => {
         setOpenDeleteDialog(true);
     };
     
-      const handleDeleteDialogClose = () => {
+    // Close Delete Dialog
+    const handleDeleteDialogClose = () => {
         setOpenDeleteDialog(false);
     };
 
@@ -132,7 +136,9 @@ const Transactions = ({
             savings.sum -= transac.amount; 
     }
 
+    // ========================================================
     // For displaying data corresponding to that month and year
+    // ========================================================
 
     const userTransacs = user_transactions.user_economy ? user_transactions.user_economy : null
     const filterUserTransacs = userTransacs ?
@@ -142,9 +148,16 @@ const Transactions = ({
         })
         : null;
 
+    const [disableButtonDate, setDisableButtonDate] = useState(
+        !( sidebarDate.sideBarDateText === getMonthYear(new Date()) )
+    );
+
+    useEffect(() => {
+        setDisableButtonDate(!( sidebarDate.sideBarDateText === getMonthYear(new Date()) ))
+    }, [sidebarDate.sideBarDateText]);
+
     return (
         <div style={{marginTop: '1rem', color: '#fff'}}>
-            {/* <div>{sidebarDate.sideBarDateText}</div> */}
             {groupOptions.map((groupOpt, index) => {
                 const useColor = groupOptionsColors[groupOpt];
                 return (
@@ -211,6 +224,7 @@ const Transactions = ({
                                                 <IconButton 
                                                     color="error"
                                                     aria-label="delete" 
+                                                    disabled={disableButtonDate}
                                                     size="small"
                                                     sx={{ width: '6%' }}
                                                     onClick={() => handleDelete(transac._id)}

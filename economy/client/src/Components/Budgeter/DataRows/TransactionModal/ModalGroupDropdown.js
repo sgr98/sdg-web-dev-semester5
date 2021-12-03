@@ -31,16 +31,19 @@ const ModalGroupDropdown = ({
     const [selectedGroupIndex, setSelectedGroupIndex] = useState(0);
     const open = Boolean(groupAnchorEl);
 
+    // Open dropdown menu
     const handleClickListItem = (event) => {
         setGroupAnchorEl(event.currentTarget);
     };
 
+    // Set group value when a list item is clicked
     const handleMenuItemClick = (event, index) => {
         setSelectedGroupIndex(index);
         setGroupAnchorEl(null);
         setTempTransaction({ ...tempTransaction, group: groupOptions[index] });
     };
 
+    // Close dropdown menu
     const handleClose = () => {
         setGroupAnchorEl(null);
     };

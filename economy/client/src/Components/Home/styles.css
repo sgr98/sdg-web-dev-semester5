@@ -9,7 +9,7 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
-    color: #ddd;
+    color: #eee;
 }
 
 .home-introduction {
@@ -21,8 +21,13 @@
     /* background: #1E5128; */
 }
 
+@media screen and (max-width:600px) {
+    .home-introduction {
+        padding: 0.75rem;
+    }
+}
+
 .home-title {
-    padding: 5rem 1rem;
     font-style: italic;
     font-weight: 700;
     line-height: 0.1em;
@@ -31,6 +36,13 @@
 .home-title-sub {
     display: flex;
     flex-direction: row;
+}
+
+@media screen and (max-width:600px) {
+    .home-title-sub {
+        flex-direction: column;
+        font-weight: 700;
+    }
 }
 
 .home-title-sub > div {
@@ -51,7 +63,7 @@
 
 .home-title-info {
     text-align: center;
-    padding: 5rem 8rem;
+    padding: 3rem 6rem;
     padding-bottom: 5rem;
     line-height: 1.5;
     letter-spacing: 1.2;
@@ -60,7 +72,7 @@
 .home-signin {
     margin: 0;
     padding: 5rem 2rem;
-    background: #e3f6fc;
+    background: #ace4f6;
     /* background: #7d1d1d; */
 }
 
@@ -84,16 +96,16 @@
 }
 
 .home-card-container > div:nth-child(1){
-    width: 70%;
+    width: 65%;
     padding-right: 1rem;
 }
 
 .home-card-container > div:nth-child(2){
-    width: 30%;
+    width: 35%;
 }
 
 .home-signin-image {
-    background-image: url("./../../Images/home_background.svg");
+    background-image: url("./../../Images/home_how_to_use.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     height: 100%;
@@ -108,7 +120,7 @@
 .home-info {
     margin: 0;
     padding: 5rem 2rem;
-    background: #ace4f6;
+    background: #e3f6fc;
     /* background: #7d1d1d; */
 }
 
@@ -123,14 +135,4 @@
 
 .home-footer-sub {
     padding: 1rem;
-}
-
-@media screen and (max-width: 480px) {
-    .home-introduction {
-        padding: 2rem;
-    }
-    
-    .home-title {
-        padding: 2rem 5rem;
-    }
 }

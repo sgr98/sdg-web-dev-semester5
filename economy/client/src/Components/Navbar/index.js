@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory, useLocation } from 'react-router-dom';
-import { Box, AppBar, Typography, Toolbar, Button, IconButton, Tab, Tabs } from '@mui/material';
+import { Box, AppBar, Typography, Toolbar, Button } from '@mui/material';
+// import { IconButton, Tab, Tabs } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import decode from 'jwt-decode';
-import LogoutIcon from '@mui/icons-material/Logout';
+// import LogoutIcon from '@mui/icons-material/Logout';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 import { LOGOUT } from '../../constants/actionTypes';

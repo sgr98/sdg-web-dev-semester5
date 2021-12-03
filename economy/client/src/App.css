@@ -3,7 +3,9 @@
 body {
     margin: 0;
     /* background-image: url('./Images/body_background.png'); */
-    background: linear-gradient(162deg, rgba(253,250,246,1) 0%,  rgba(186,208,232,1) 100%);
+    /* background: linear-gradient(162deg, rgba(253,250,246,1) 0%,  rgba(186,208,232,1) 100%); */
+    background: linear-gradient(172deg, rgba(186,208,232,1) 0%, rgba(253,250,246,1) 30%, 
+    rgba(230,235,241,1) 70%, rgba(186,208,232,1) 100%);
     min-height: 100vh;
     font-family: 'Roboto', sans-serif;  
 }

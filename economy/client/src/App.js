@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import React from 'react';
+// import { useEffect } from 'react';
+// import { useDispatch } from 'react-redux';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import Navbar from './Components/Navbar';
@@ -10,7 +11,7 @@ import Analytics from './Components/Analytics';
 import './App.css';
 
 const App = () => {
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
 
     // useEffect(() => {
     //     dispatch();

@@ -5,6 +5,9 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 
 import './styles.css';
+import { 
+    homeIntroductionTitle,
+} from './styles';
 
 const Home = () => {
     return (
@@ -14,8 +17,7 @@ const Home = () => {
                     <Typography
                         // variant="h2"
                         component="div"
-                        align="left"
-                        sx={{ flexGrow: 1, fontSize: '70px' }}
+                        sx={homeIntroductionTitle}
                         className="home-title"
                     >
                         <div className="home-title-sub">
@@ -32,74 +34,11 @@ const Home = () => {
                         className="home-title-info"
                     >
                         Having money shortage? <br /> <br />
-                        Did you know that Home Budgeting and Management itself can contribute 
-                        towards your essential as well as desired needs. Home Budget Economy 
-                        provides you a platform to collate your income and expenditures. Thereby, 
-                        helping you keep track of your finances as well as motivates you to control 
-                        your undue expenses.
+                        Did you know that simple budgeting or management itself can contribute 
+                        towards your essential as well as desired needs. We provide you a platform 
+                        to collate your income and expenditures. Thereby, helping you keep track of 
+                        your finances as well as motivates you to control your undue expenses.
                     </Typography>
-                </div>
-            </section>
-
-            <section>
-                <div className="home-signin">
-                    <Typography
-                        variant="h3"
-                        component="div"
-                        align="left"
-                        sx={{ flexGrow: 1 }}
-                        className="home-card-title"
-                    >
-                        How to Use?
-                    </Typography>
-
-                    <div className="home-card-container">
-                        <div>
-                            <Typography
-                                component="div"
-                                align="left"
-                                sx={{ flexGrow: 1 }}
-                                className="home-card-info"
-                            >
-                                After signing in, Home Budget Economy provides you with a dashboard. 
-                                Dashboard will connect you with your necessary tools required to 
-                                start budgeting. <br />
-                                Dashboard contains Budgeter and Analytics.
-                            </Typography>
-                            <Typography
-                                component="div"
-                                align="left"
-                                sx={{ flexGrow: 1 }}
-                                className="home-card-info"
-                            >
-                                <strong>Budgeter</strong> allows you to add your income and expenses in 
-                                a tabular format. For adding data you require to enter 4 fields titled as:
-                                <br />&ensp;&ensp;&ensp;&ensp;&ensp;Group
-                                <br />&ensp;&ensp;&ensp;&ensp;&ensp;Title
-                                <br />&ensp;&ensp;&ensp;&ensp;&ensp;Description
-                                <br />&ensp;&ensp;&ensp;&ensp;&ensp;Amount
-                                <br />with "Description" being optional and rest being mandatory. <br />
-                                You can edit or delete the entries provided next to each entry. <br /> 
-                                <br />
-                                Your data will be automatically arranged in their respective categories
-                                colour coded in terms of necessities.
-                            </Typography>
-                            <Typography
-                                component="div"
-                                align="left"
-                                sx={{ flexGrow: 1 }}
-                                className="home-card-info"
-                            >
-                                <strong>Analytics</strong> eases you to visualize your data by plotting 
-                                your data in an area chart graph. This would allow you to visualize
-                                your spending habits overtime. The data would also be categorized 
-                                according to essentails and luxuries to help you visualize better.
-                            </Typography>
-                        </div>
-                        <div>
-                            <div className="home-signin-image"></div>
-                        </div>
-                    </div>
                 </div>
             </section>
 
@@ -137,6 +76,90 @@ const Home = () => {
                     >
                         Click here to Sign In
                     </Button>
+                </div>
+            </section>
+
+            <section>
+                <div className="home-signin">
+                    <Typography
+                        variant="h3"
+                        component="div"
+                        align="left"
+                        sx={{ flexGrow: 1 }}
+                        className="home-card-title"
+                    >
+                        How to Use?
+                    </Typography>
+
+                    <div className="home-card-container">
+                        <div>
+                            <Typography
+                                component="div"
+                                align="left"
+                                sx={{ flexGrow: 1 }}
+                                className="home-card-info"
+                            >
+                                After signing in, Home Budget Economy provides you with a dashboard. 
+                                Dashboard will connect you with your necessary tools required to 
+                                start budgeting. <br />
+                                Dashboard consists of two components: 
+                                <strong>Budgeter</strong> and <strong>Analytics</strong>.
+                            </Typography>
+                            <Typography
+                                component="div"
+                                align="left"
+                                sx={{ flexGrow: 1 }}
+                                className="home-card-info"
+                            >
+                                <strong>Budgeter</strong> allows you to add your income and expenses in 
+                                a tabular format. The data gets added to the table belonging to the month 
+                                it was written in.<br />
+                                <br />For adding data you require to enter 4 fields titled as:
+                                <br />&ensp;&ensp;&ensp;&ensp;&ensp;Group
+                                <br />&ensp;&ensp;&ensp;&ensp;&ensp;Title
+                                <br />&ensp;&ensp;&ensp;&ensp;&ensp;Description
+                                <br />&ensp;&ensp;&ensp;&ensp;&ensp;Amount
+                                <br />with "Description" being optional and rest being mandatory. <br />
+                                You can edit or delete the entries provided next to each entry. <br />
+                                 
+                                <br />
+                                Your data will be automatically arranged in their respective categories
+                                colour coded in terms of necessities.
+                            </Typography>
+                            <Typography
+                                component="div"
+                                align="left"
+                                sx={{ flexGrow: 1 }}
+                                className="home-card-info"
+                            >
+                                <strong>Analytics</strong> eases you to visualize your data by plotting 
+                                your data in an area chart graph. This would allow you to visualize
+                                your spending habits overtime. The data would also be categorized 
+                                according to essentails and luxuries to help you visualize better.
+                                <br /><br />
+                                It provides you with 6 plots. <i>Income</i>, <i> Necessities</i>, 
+                                <i> Essentials</i>, <i> Non-Essentials</i> and <i> Luxuries</i>, 
+                                <i> Savings Remaining</i>. These can be plotted and un-plotted by
+                                clicking on the tabs above the graph. 
+                            </Typography>
+
+                            <Typography
+                                component="div"
+                                align="left"
+                                sx={{ flexGrow: 1 }}
+                                className="home-card-info"
+                            >   
+                                Additonally, you can select a specific month to view previous data.
+                                When a month is selected, it will present data for only that 
+                                particular month. By default, current month would be selected.
+                                If any other month is selected, then no entry can be made. However, 
+                                data can be viewed and updated but not deleted.
+                            </Typography>
+                        </div>
+                        <div>
+                            <div className="home-signin-image"></div>
+                        </div>
+                    </div>
                 </div>
             </section>
 
