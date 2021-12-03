@@ -17,7 +17,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-import { getDate, getMonth } from '../../../../Functions/date';
+import { getDate, getMonth, getMonthYear } from '../../../../Functions/date';
 
 import { 
     budgeterDropdownBox, 
@@ -60,8 +60,6 @@ const groupOptionsColors = {
     'Miscellaneous': ['rgba(15, 69, 118, 0.9)', 'rgba(15, 69, 118, 0.2)'],
 }
 
-const months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
-
 const Transactions = ({ 
     user_transactions,
     setTempTransaction,
@@ -69,6 +67,7 @@ const Transactions = ({
     setCreateEntry,
     handleModalOpen,
     handleDelete,
+    sidebarDate,
 }) => {
     const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
 
@@ -133,8 +132,19 @@ const Transactions = ({
             savings.sum -= transac.amount; 
     }
 
+    // For displaying data corresponding to that month and year
+
+    const userTransacs = user_transactions.user_economy ? user_transactions.user_economy : null
+    const filterUserTransacs = userTransacs ?
+        userTransacs.filter((transac) => {
+            const monYear = getMonthYear(transac.createdAt);
+            return monYear === sidebarDate.sideBarDateText;
+        })
+        : null;
+
     return (
         <div style={{marginTop: '1rem', color: '#fff'}}>
+            {/* <div>{sidebarDate.sideBarDateText}</div> */}
             {groupOptions.map((groupOpt, index) => {
                 const useColor = groupOptionsColors[groupOpt];
                 return (
@@ -150,8 +160,8 @@ const Transactions = ({
                         </AccordionSummary>
                         <Divider />
                         <AccordionDetails sx={{ bgcolor: useColor[1] }}>
-                        {user_transactions.user_economy ? 
-                            user_transactions.user_economy.map((transac, index, array) => {
+                        {filterUserTransacs ? 
+                            filterUserTransacs.map((transac, index, array) => {
                                 addTotalSavings(transac)
                                 return (
                                     transac.group === groupOpt ? (

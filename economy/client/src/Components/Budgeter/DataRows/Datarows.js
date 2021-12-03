@@ -162,6 +162,7 @@ const Datarows = () => {
                 setCreateEntry={setCreateEntry}
                 handleModalOpen={handleModalOpen}
                 handleDelete={handleDelete}
+                sidebarDate={sidebarDate}
             />
         </div>
     );

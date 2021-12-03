@@ -138,7 +138,13 @@ const Analytics = () => {
     }, [dispatch]);
 
     // Building the dataset
-    // const userTransacs = user_transactions.user_economy ? user_transactions.user_economy : []
+    // const userTransacs = user_transactions.user_economy ? user_transactions.user_economy : null
+    // const filterUserTransacs = userTransacs ?
+    //     userTransacs.filter((transac) => {
+    //         const monYear = getMonthYear(transac.createdAt);
+    //         return monYear === sidebarDate.sideBarDateText;
+    //     })
+    //     : null;
 
     const data1 = {
         labels,
